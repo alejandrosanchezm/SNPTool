@@ -1,0 +1,39 @@
+<div class="modal fade" id="error_notification" tabindex="-1" role="dialog" aria-labelledby="error_notification" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-light">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Notificar un error</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <!-- MODAL PARA LA NOTIFICACIÓN DE ERRORES -->
+            <div class="modal-body">
+                <form action="/error_notification" method="POST" enctype="multipart/form-data">
+                    <!-- EMAIL -->
+                    <div class="form-group" style="text-align: left;">
+                        <label for="exampleInputEmail1" style="text-align: left;">Email</label>
+                        <input type="email" class="form-control bg-light" name="email_error" id="email_error" aria-describedby="emailHelp" placeholder="email@ejemplo.es">
+                        <small id="emailHelp" class="form-text text-muted">Opcional</small>
+                    </div>
+                    <!-- JOB_ID -->
+                    <div class="form-group" style="text-align: left;">
+                        <label for="exampleInputPassword1" style="text-align: left;">Job ID</label>
+                        <input type="text" class="form-control bg-light" name="job_id_error" id="job_id_error" placeholder="Job_id">
+                        <small id="emailHelp" class="form-text text-muted">Opcional</small>
+                    </div>
+                    <!-- ASUNTO -->
+                    <div class="form-group" style="text-align: left;">
+                        <label for="exampleInputPassword1" style="text-align: left;">Asunto del problema</label>
+                        <input type="text" class="form-control bg-light" name="issue_error" id="issue_error" placeholder="Asunto" required>
+                    </div>
+                    <!-- DESCRIPCIÓN -->
+                    <div class="form-group" style="text-align: left;">
+                        <label for="exampleFormControlTextarea1" style="text-align: left;">Descripción del problema</label>
+                        <textarea class="form-control bg-light" name="description_error" id="description_error" rows="3" maxlength="500" required></textarea>
+                    </div>
+                    <!-- BOTÓN DE ENVIAR -->
+                    <button type="submit" class="btn btn-info">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

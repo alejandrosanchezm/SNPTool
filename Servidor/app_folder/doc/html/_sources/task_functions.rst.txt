@@ -1,0 +1,7 @@
+task\_functions module
+======================
+
+.. automodule:: task_functions
+   :members:
+   :undoc-members:
+   :show-inheritance:

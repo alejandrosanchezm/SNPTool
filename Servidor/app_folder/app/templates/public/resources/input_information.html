@@ -1,0 +1,90 @@
+<div id="accordion">
+    <div class="card bg-light">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-link text-dark txt-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Formato de entrada</button>
+            </h5>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <div class="card shadow bg-light">
+                    <div class="card-header">
+                        <h5>Cómo hacer una consulta</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Las consultas se pueden hacer escribiéndola directamente en la aplicación, o subiendo un archivo con el formato que se explica a continuación.</p>
+                        <p>Puedes añadir un título <span class="text-info" style="font-size: 12px;">(opcional)</span> al trabajo para identificarlo más fácilmente.</p>
+                    </div>
+                </div>
+                <div class="card shadow bg-light">
+                    <div class="card-header">
+                        <h5>Consultas por escritura en la aplicación</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <p class="lead-8">El formato de entrada es un formato simple:</p>
+                        <p>La notación que utiliza la aplicación para las posiciones en los cromosomas es la notación <strong><a class="txt-dark" href="https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13/">GRCh37/hg19</a></strong>. Cada consulta se escribe
+                            en una línea con los valores separados por comas.
+                            <p>Los valores a introducir y sus posiciones son los siguientes:</p><span style="font-size:12px; margin-left:15px;">(Haz click sobre ellos para ver más)</span>
+                            <ul>
+                                <li>
+                                    <a class="" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 14px;">
+                                    Cromosoma (Del 1 al 22, y el X)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 14px;">
+                                        Posición en notación hg19(1-pos)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 14px;">
+                                        Alelo de referencia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 14px;">
+                                        Alelo alternativa
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 14px;">
+                                        <span style="font-size: 12px" class="badge badge-pill badge-info">Opcional</span> Aminoácido de referencia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 14px;">
+                                        <span style="font-size: 12px" class="badge badge-pill badge-info">Opcional</span> Aminoácido alternativo
+                                    </a>
+                                </li>
+                            </ul>
+                            <p>Las posiciones permitidas por la aplicación vienen indicadas en el fichero de posiciones que puede descargarse <a class="txt-dark" style="font-size: 14px;" href="/download_pos_file">en este link.</a></p>
+                    </div>
+                </div>
+                <div class="card shadow bg-light">
+                    <div class="card-header">
+
+                        <h5>Consultas mediante ficheros</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            Los formatos de archivos admitidos son <strong>'.txt', '.csv', 'vcf' y '.xlsx'.</strong> Su tamaño no debe superar los 15 MB.
+                            <ul>
+                                <li><a href="/download_example_file/txt" class="bg-light" style="font-size: 14px;">Descargar un fichero '.txt' de ejemplo</a></li>
+                                <li><a href="/download_example_file/csv" class="bg-light" style="font-size: 14px;">Descargar un fichero '.csv' de ejemplo</a></li>
+                                <li><a href="/download_example_file/xlsx" class="bg-light" style="font-size: 14px;">Descargar un fichero '.xlsx' de ejemplo</a></li>
+                                <li><a href="/download_example_file/vcf" class="bg-light" style="font-size: 14px;">Descargar un fichero '.vcf' de ejemplo</a></li>
+                            </ul>
+                        </p>
+                        <p>
+                            En el caso de subir ficheros <strong>'.txt', '.csv' o '.xlsx'.</strong>, éstos no debe contener cabecera, simplemente los valores con el mismo formato explicado anteriormente.
+                        </p>
+                        <p>
+                            En caso de ser ficheros <strong>'.txt' o '.csv'</strong>, además, los valores tendrán que estar separados por comas. (Es decir, el formato será igual al formato de la entrada de la aplicación)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

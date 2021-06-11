@@ -1,0 +1,72 @@
+{% extends "public/templates/public_template.html" %} {% block title %} SNP TOOL - Cargando {% endblock %} {% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+            <h1 style="margin:50px; text-align: center;">Tu petición ha sido recibida</h1>
+            <hr style="margin:70px;"> {% include 'public/resources/loading_icon.html' %}
+            <hr style="margin:70px;">
+            <p style="margin-bottom:10px; text-align: center;">
+                Guarda este identificador de tu consulta, podrás usarlo en caso de que quieras volver a buscarla más adelante.
+            </p>
+            <h4 style="text-align: center;">
+                <strong>Job id:</strong> {{ job_id }}
+                <button style="background-color: rgba(226, 226, 226, 0.712); border-radius: 15px; margin-left:5px;" type="button" id="copy_btn" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ job_id }}"
+                    title="Copiar al portapapeles">
+                    &#8203
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" version="1.1" width="24" height="24"
+                         viewBox="0 0 24 24"><path d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" /></svg>
+                </button>
+            </h4>
+            <div class="d-flex align-middle">
+                <span id="status" style="margin: auto; margin-bottom:10px; font-size:20px;" class="badge badge-info ">Estado: Pendiente</span>
+            </div>
+            <div style="text-align: center; visibility:hidden;margin-top:10px;" id="time_message">
+                <p> Es posible que la consulta tarde algo de tiempo. </p>
+            </div>
+            <p style="margin-top:20px; text-align: center;">
+                En cuanto esté procesada tu petición, te redireccionaremos a la página de resultados.
+            </p>
+
+            <div class=" return_to_index " style="display:none; ">
+                <button type="button " href="/index " class="btn btn-info ">Volver a la página de Inicio</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block script %} {% include 'public/resources/tooltip.html' %}
+
+<script>
+    $(function() {
+        var job_id = "{{ job_id }} ";
+
+        $.ajax("{{url_for( '.progress', job_id=job_id)}} ", {
+            dataType: "json ",
+            async: true,
+            timeout: 2 * 60 * 60 * 1000,
+            success: function(resp) {
+                console.log(resp);
+                window.location = "{{ url_for( 'results', job_id=job_id) }} "
+                return;
+            }
+        });
+    });
+
+    setTimeout(function() {
+        document.getElementById('time_message').style.visibility = "visible ";
+    }, 10000);
+
+    setInterval(function() {
+        $.ajax("{{url_for( '.status', job_id=job_id)}} ", {
+            dataType: "json ",
+            async: true,
+            success: function(resp) {
+                document.getElementById("status").innerHTML = "Estado: " + resp.state;
+                document.getElementById("status").className = resp.color_class;
+            }
+        });
+    }, 2000);
+</script>
+{% endblock %}

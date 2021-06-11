@@ -1,0 +1,15 @@
+app_folder
+==========
+
+.. toctree::
+   :maxdepth: 4
+
+   app
+   config
+   data_structs
+   init_functions
+   messages
+   run_app
+   task_functions
+   tasks
+   view_functions

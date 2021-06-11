@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Herramienta para la predicción de la patogenicidad de los SNP.">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='imgs/favicon.png') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <!-- Custom css  -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static',filename='imgs/favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/dark-mode.css') }}">
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 30px;">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+            <img src="{{ url_for('static',filename='imgs/favicon.png') }}" width="30" height="30" alt="SNPTool icon">
+        </a>
+        <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse bg-light" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <style>
+                    [data-theme="dark"] a:hover,
+                    a:focus {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .dropdown-menu:focus {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .dropdown-menu:hover {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .dropdown-menu:active {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .nav-link:hover {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .nav-link a {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .dropdown-item:hover {
+                        background-color: #333 !important;
+                    }
+                </style>
+                <li class="nav-item">
+                    <a class="nav-link bg-light" href="/">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link bg-light" href="/api">API</a>
+                </li>
+                <li class="nav-item dropdown bg-light">
+                    <a class="nav-link dropdown-toggle bg-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sobre la aplicación
+                    </a>
+                    <div class="dropdown-menu bg-light" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item bg-light" href="/about_models">Sobre los modelos</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item bg-light" href="/user_terms">Términos de uso</a>
+                        <a class="dropdown-item bg-light" href="/cookie_policy">Política de cookies</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="custom-control custom-switch" style="margin-right:20px;">
+                <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+                <label class="custom-control-label" for="darkSwitch">Modo oscuro</label>
+            </div>
+            <form class="form-inline my-2 my-lg-0" action="{{ url_for('search_job') }}">
+                <input class="form-control mr-sm-2" name="search_input" type="search" placeholder="Buscar petición (jobID)" aria-label="Buscar" required>
+                <button class="btn btn-dark my-2 my-sm-0" id="search_btn" type="submit">Buscar</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+    </div>
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+
+    <div class="cookie-container">
+        <p>
+            Este sitio solo usa cookies temporales con el fin de facilitar el uso y navegación en esta aplicación. Puedes obtener más información en la <a href="/cookie_policy">Política de cookies</a> y en la <a href="/user_terms">Política de Privacidad</a>
+        </p>
+        <button class="cookie-btn">¡Entendido!</button>
+    </div>
+
+    <script src="{{ url_for('static',filename='js/dark-mode-switch.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/app.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+    {% block script %}{% endblock %}
+
+</body>
+
+
+</html>

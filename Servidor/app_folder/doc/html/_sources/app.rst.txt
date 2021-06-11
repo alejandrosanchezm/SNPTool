@@ -1,0 +1,45 @@
+app package
+===========
+
+Submodules
+----------
+
+app.api module
+--------------
+
+.. automodule:: app.api
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+app.downloads module
+--------------------
+
+.. automodule:: app.downloads
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+app.errors module
+-----------------
+
+.. automodule:: app.errors
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+app.views module
+----------------
+
+.. automodule:: app.views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: app
+   :members:
+   :undoc-members:
+   :show-inheritance:

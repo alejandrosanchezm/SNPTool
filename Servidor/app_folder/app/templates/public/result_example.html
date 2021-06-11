@@ -1,0 +1,1642 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Herramienta para la predicción de la patogenicidad de los SNP.">
+    <link rel="shortcut icon" href="http://37.35.239.182:5000/static/imgs/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <!-- Custom css  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" type="image/png" href="/static/imgs/favicon.png">
+    <link rel="stylesheet" href="/static/css/dark-mode.css">
+
+    <title> SNP TOOL - Resultados </title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 30px;">
+        <a class="navbar-brand" href="/">
+            <img src="/static/imgs/favicon.png" width="30" height="30" alt="SNPTool icon">
+        </a>
+        <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse bg-light" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <style>
+                    [data-theme="dark"] a:hover,
+                    a:focus {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .dropdown-menu:focus {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .dropdown-menu:hover {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .dropdown-menu:active {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .nav-link:hover {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .nav-link a {
+                        background-color: #333 !important;
+                    }
+                    
+                    [data-theme="dark"] .dropdown-item:hover {
+                        background-color: #333 !important;
+                    }
+                    /*
+                                        .dropdown-menu:hover,
+                    .dropdown-menu:active,
+                    .nav-link:hover,
+                    .dropdown-menu:hover,
+                    .dropdown-item:hover
+                    */
+                </style>
+                <li class="nav-item">
+                    <a class="nav-link bg-light" href="/">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link bg-light" href="/api">API</a>
+                </li>
+                <li class="nav-item dropdown bg-light">
+                    <a class="nav-link dropdown-toggle bg-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sobre la aplicación
+                    </a>
+                    <div class="dropdown-menu bg-light" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item bg-light" href="/about_models">Sobre los modelos</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item bg-light" href="/user_terms">Términos de uso</a>
+                        <a class="dropdown-item bg-light" href="/policies">Política de cookies</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="custom-control custom-switch" style="margin-right:20px;">
+                <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+                <label class="custom-control-label" for="darkSwitch">Modo oscuro</label>
+            </div>
+            <form class="form-inline my-2 my-lg-0" action="/search_job">
+                <input class="form-control mr-sm-2" name="search_input" type="search" placeholder="Buscar petición (jobID)" aria-label="Buscar" required>
+                <button class="btn btn-dark my-2 my-sm-0" id="search_btn" type="submit">Buscar</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container">
+
+    </div>
+    <main>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1>Resultados</h1>
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content bg-light">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Terminología</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Las <strong>bases</strong> pueden ser:</p>
+                        <ul>
+                            <li>'A': Adenina</li>
+                            <li>'C': Citosina</li>
+                            <li>'G': Guanina</li>
+                            <li>'T': Timina</li>
+                        </ul>
+                        <p>Los <strong>aminoácidos</strong> pueden ser:</p>
+                        <ul style=" columns: 2;">
+                            <li> 'A': Alanina </li>
+                            <li> 'C': cisteína </li>
+                            <li> 'D': ácido aspártico </li>
+                            <li> 'E': ácido glutámico </li>
+                            <li> 'F': fenilalanina </li>
+                            <li> 'G': glicina </li>
+                            <li> 'H': histidina </li>
+                            <li> 'I': isoleucina </li>
+                            <li> 'K': lisina </li>
+                            <li> 'L': leucina </li>
+                            <li> 'M': metionina </li>
+                            <li> 'N': asparagina </li>
+                            <li> 'P': Prolina </li>
+                            <li> 'Q': glutamina </li>
+                            <li> 'R': arginina </li>
+                            <li> 'S': serina </li>
+                            <li> 'T': treonina </li>
+                            <li> 'V': Valina </li>
+                            <li> 'W': triptófano </li>
+                            <li> 'Y': tirosina </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-left: 60px; margin-right: 60px;">
+            <div class="row">
+
+                <div class="card bg-light col-sm-12 col-md-12 col-lg-4">
+                    <div class="card-body">
+
+                        <div style="margin: 20px"><strong>  Título: </strong>Datos sobre el genoma 1</div>
+
+                        <div style="margin: 20px"><strong> id: </strong>173899b1-02ff-4bbc-af53-7cd60927196c
+                            <button style="background-color: rgba(226, 226, 226, 0.712);" type="button" class="btn btn-default btn-copy js-tooltip js-copy" id="copy_btn" data-toggle="tooltip" data-placement="bottom" data-copy="173899b1-02ff-4bbc-af53-7cd60927196c" title="Copiar Job ID al portapapeles">                    
+                        &#8203
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" version="1.1" width="18"
+                                     height="18" viewBox="0 0 24 24"><path d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" /></svg>
+                    </button>
+                        </div>
+                        <div style="margin: 20px"><strong> Fecha y hora: </strong>10/05/2021 13:26:53</div>
+                        <div style="margin-top:35px; margin-left:30px;">
+                            <span>
+                        <a href="/download_csv_file/ejemplo"><button type="button" style="margin-right:20px; margin-bottom: 20px;" class="btn btn-info">Descargar archivo CSV
+                        </button></a>
+                    <button style="margin-right:20px; margin-bottom: 20px;" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">Terminología</button>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="card col-3 bg-light d-none d-lg-block d-xl-block">
+                    <div class="card-body bg-light text-center  my-auto" style="height: 250px; overflow-x: hidden;">
+                        <canvas id="pie-chart" height="150"></canvas>
+                    </div>
+                </div>
+
+                <div class="card col-3 bg-light d-none d-lg-block d-xl-block">
+                    <div class="card-body bg-light text-center my-auto" style="height: 250px; overflow-x: hidden;">
+                        <canvas id="pie-chart2" height="150"></canvas>
+                    </div>
+                </div>
+
+                <!--<hr>-->
+            </div>
+
+            <div>
+                <div style="overflow-x:auto;">
+                    <table class="table bg-light" id="tabla" style="font-size: 15px;">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" onclick="sortTable(0)"> # </th>
+                                <th scope="col" onclick="sortTable(1)">Cromosoma (hg19)</th>
+                                <th scope="col" onclick="sortTable(2)">Posición hg19(1-based)</th>
+                                <th scope="col" onclick="sortTable(3)">Alelo de Referencia</th>
+                                <th scope="col" onclick="sortTable(4)">Alelo alternativo</th>
+                                <th scope="col" onclick="sortTable(5)">Aminoácido de referencia</th>
+                                <th scope="col" onclick="sortTable(6)">Aminoácido alternativo</th>
+                                <th scope="col" onclick="sortTable(7)">Predicción</th>
+                                <th scope="col" onclick="sortTable(8)" data-bs-toggle="tooltip" data-bs-placement="top" title="Más cercanos a 0 son benignos, más cercanos a 1 son patógenos.">ClinPred score</th>
+                                <th scope="col" onclick="sortTable(9)" data-bs-toggle="tooltip" data-bs-placement="top" title="Rango: -1,11707 a 0,750927. Cuanto mayor sea la puntuación, más probable es que la variante sea patógena. Se sugiere un corte entre deletéreo ('D') y tolerante ('T') en 0,0692655.">BayesDel_addAF score</th>
+                                <th scope="col" onclick="sortTable(10)" data-bs-toggle="tooltip" data-bs-placement="top" title="Rango: -1,31914 a 0,840878. Cuanto mayor sea la puntuación, más probable es que la variante sea patógena. Se sugiere un corte entre perjudicial ('D') y tolerado ('T') es -0,0570105.">BayesDel_noAF score</th>
+                                <th scope="col" onclick="sortTable(11)">Consecuencia más severa</th>
+                                <th scope="col">Posibles consecuencias</th>
+                            </tr>
+                        </thead>
+                        <tbody id="MyTable">
+
+                            <tr class="table-success row_to_order" style="color:black;">
+                                <style>
+                                    [data-theme="dark"] .table-danger td {
+                                        background-color: rgb(172, 123, 123);
+                                    }
+                                    
+                                    [data-theme="dark"] .table-success td {
+                                        background-color: rgb(144, 175, 147);
+                                    }
+                                </style>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>955563</td>
+                                <td>G</td>
+                                <td>C</td>
+                                <td>R</td>
+                                <td>P</td>
+                                <td>Benigno</td>
+                                <td>0.007661</td>
+                                <td>-0.565965</td>
+                                <td>-0.56089</td>
+                                <td>intron variant</td>
+
+                                <td>
+                                    <button type="button" class="btn btn-info" onclick="showConsequences('row_0')">Ver más</button>
+                                </td>
+
+                            </tr>
+
+                            <tr class="row_additional">
+                                <td colspan="13" style="padding:0;">
+                                    <table id="row_0" style="display:none;margin-bottom:0; z-index:-2" class="table table-bordered">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th scope="col"> Posibles consecuencias </th>
+
+                                                <th scope="col ">distance</th>
+
+                                                <th scope="col ">gene_symbol</th>
+
+                                                <th scope="col ">hgnc_id</th>
+
+                                                <th scope="col ">gene_symbol_source</th>
+
+                                                <th scope="col ">transcript_id</th>
+
+                                                <th scope="col ">consequence_terms</th>
+
+                                                <th scope="col ">impact</th>
+
+                                                <th scope="col ">variant_allele</th>
+
+                                                <th scope="col ">strand</th>
+
+                                                <th scope="col ">biotype</th>
+
+                                                <th scope="col ">gene_id</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-light">
+
+                                            <tr>
+                                                <td> 1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>NOC2L</td>
+
+                                                <td>HGNC:24517</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000327044</td>
+
+                                                <td>[&#39;intron variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>C</td>
+
+                                                <td>-1</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>ENSG00000188976</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 2</td>
+
+                                                <td>2683.0</td>
+
+                                                <td>NOC2L</td>
+
+                                                <td>HGNC:24517</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000469563</td>
+
+                                                <td>[&#39;downstream gene variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>C</td>
+
+                                                <td>-1</td>
+
+                                                <td>retained intron</td>
+
+                                                <td>ENSG00000188976</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 3</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>NOC2L</td>
+
+                                                <td>HGNC:24517</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000477976</td>
+
+                                                <td>[&#39;intron variant&#39;, &#39;non coding transcript variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>C</td>
+
+                                                <td>-1</td>
+
+                                                <td>retained intron</td>
+
+                                                <td>ENSG00000188976</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 4</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>NOC2L</td>
+
+                                                <td>HGNC:24517</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000487214</td>
+
+                                                <td>[&#39;intron variant&#39;, &#39;non coding transcript variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>C</td>
+
+                                                <td>-1</td>
+
+                                                <td>processed transcript</td>
+
+                                                <td>ENSG00000188976</td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr class="table-success row_to_order" style="color:black;">
+                                <style>
+                                    [data-theme="dark"] .table-danger td {
+                                        background-color: rgb(172, 123, 123);
+                                    }
+                                    
+                                    [data-theme="dark"] .table-success td {
+                                        background-color: rgb(144, 175, 147);
+                                    }
+                                </style>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>976598</td>
+                                <td>C</td>
+                                <td>T</td>
+                                <td>T</td>
+                                <td>I</td>
+                                <td>Benigno</td>
+                                <td>0.015723</td>
+                                <td>-0.403534</td>
+                                <td>-0.324606</td>
+                                <td>missense variant</td>
+
+                                <td>
+                                    <button type="button" class="btn btn-info" onclick="showConsequences('row_1')">Ver más</button>
+                                </td>
+
+                            </tr>
+
+                            <tr class="row_additional">
+                                <td colspan="13" style="padding:0;">
+                                    <table id="row_1" style="display:none;margin-bottom:0; z-index:-2" class="table table-bordered">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th scope="col"> Posibles consecuencias </th>
+
+                                                <th scope="col ">sift_score</th>
+
+                                                <th scope="col ">hgnc_id</th>
+
+                                                <th scope="col ">gene_symbol_source</th>
+
+                                                <th scope="col ">protein_end</th>
+
+                                                <th scope="col ">impact</th>
+
+                                                <th scope="col ">biotype</th>
+
+                                                <th scope="col ">cds_start</th>
+
+                                                <th scope="col ">consequence_terms</th>
+
+                                                <th scope="col ">protein_start</th>
+
+                                                <th scope="col ">gene_id</th>
+
+                                                <th scope="col ">gene_symbol</th>
+
+                                                <th scope="col ">polyphen_score</th>
+
+                                                <th scope="col ">sift_prediction</th>
+
+                                                <th scope="col ">cdna_end</th>
+
+                                                <th scope="col ">amino_acids</th>
+
+                                                <th scope="col ">cds_end</th>
+
+                                                <th scope="col ">distance</th>
+
+                                                <th scope="col ">flags</th>
+
+                                                <th scope="col ">transcript_id</th>
+
+                                                <th scope="col ">codons</th>
+
+                                                <th scope="col ">variant_allele</th>
+
+                                                <th scope="col ">strand</th>
+
+                                                <th scope="col ">polyphen_prediction</th>
+
+                                                <th scope="col ">cdna_start</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-light">
+
+                                            <tr>
+                                                <td> 1</td>
+
+                                                <td>0.01</td>
+
+                                                <td>HGNC:28208</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>612.0</td>
+
+                                                <td>MODERATE</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>1834.0</td>
+
+                                                <td>[&#39;missense variant&#39;]</td>
+
+                                                <td>612.0</td>
+
+                                                <td>ENSG00000187642</td>
+
+                                                <td>PERM1</td>
+
+                                                <td>0.392</td>
+
+                                                <td>deleterious</td>
+
+                                                <td>1870.0</td>
+
+                                                <td>F/I</td>
+
+                                                <td>1834.0</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>ENST00000341290</td>
+
+                                                <td>Ttt/Att</td>
+
+                                                <td>T</td>
+
+                                                <td>-1</td>
+
+                                                <td>benign</td>
+
+                                                <td>1870.0</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 2</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC:25284</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>[&#39;downstream gene variant&#39;]</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>ENSG00000187583</td>
+
+                                                <td>PLEKHN1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>1590.0</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>ENST00000379407</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>T</td>
+
+                                                <td>1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 3</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC:25284</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>[&#39;downstream gene variant&#39;]</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>ENSG00000187583</td>
+
+                                                <td>PLEKHN1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>1590.0</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>ENST00000379409</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>T</td>
+
+                                                <td>1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 4</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC:25284</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>[&#39;downstream gene variant&#39;]</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>ENSG00000187583</td>
+
+                                                <td>PLEKHN1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>733.0</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>ENST00000379410</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>T</td>
+
+                                                <td>1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 5</td>
+
+                                                <td>0.01</td>
+
+                                                <td>HGNC:28208</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>726.0</td>
+
+                                                <td>MODERATE</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>2176.0</td>
+
+                                                <td>[&#39;missense variant&#39;]</td>
+
+                                                <td>726.0</td>
+
+                                                <td>ENSG00000187642</td>
+
+                                                <td>PERM1</td>
+
+                                                <td>0.844</td>
+
+                                                <td>deleterious</td>
+
+                                                <td>2176.0</td>
+
+                                                <td>F/I</td>
+
+                                                <td>2176.0</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>ENST00000433179</td>
+
+                                                <td>Ttt/Att</td>
+
+                                                <td>T</td>
+
+                                                <td>-1</td>
+
+                                                <td>possibly damaging</td>
+
+                                                <td>2176.0</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 6</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC:28208</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>retained intron</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>[&#39;non coding transcript exon variant&#39;]</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>ENSG00000187642</td>
+
+                                                <td>PERM1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>44.0</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>ENST00000479361</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>T</td>
+
+                                                <td>-1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>44.0</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 7</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC:25284</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>[&#39;downstream gene variant&#39;]</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>ENSG00000187583</td>
+
+                                                <td>PLEKHN1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>733.0</td>
+
+                                                <td>[&#39;cds start NF&#39;]</td>
+
+                                                <td>ENST00000491024</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>T</td>
+
+                                                <td>1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>Sin datos</td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr class="table-danger row_to_order" style="color:black;">
+                                <style>
+                                    [data-theme="dark"] .table-danger td {
+                                        background-color: rgb(172, 123, 123);
+                                    }
+                                    
+                                    [data-theme="dark"] .table-success td {
+                                        background-color: rgb(144, 175, 147);
+                                    }
+                                </style>
+                                <td>2</td>
+                                <td>1</td>
+                                <td>1464679</td>
+                                <td>C</td>
+                                <td>T</td>
+                                <td>R</td>
+                                <td>W</td>
+                                <td>Patógeno</td>
+                                <td>0.879697</td>
+                                <td>0.295075</td>
+                                <td>0.229438</td>
+                                <td>intron variant</td>
+
+                                <td>
+                                    <button type="button" class="btn btn-info" onclick="showConsequences('row_2')">Ver más</button>
+                                </td>
+
+                            </tr>
+
+                            <tr class="row_additional">
+                                <td colspan="13" style="padding:0;">
+                                    <table id="row_2" style="display:none;margin-bottom:0; z-index:-2" class="table table-bordered">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th scope="col"> Posibles consecuencias </th>
+
+                                                <th scope="col ">gene_symbol</th>
+
+                                                <th scope="col ">hgnc_id</th>
+
+                                                <th scope="col ">gene_symbol_source</th>
+
+                                                <th scope="col ">transcript_id</th>
+
+                                                <th scope="col ">consequence_terms</th>
+
+                                                <th scope="col ">impact</th>
+
+                                                <th scope="col ">strand</th>
+
+                                                <th scope="col ">variant_allele</th>
+
+                                                <th scope="col ">biotype</th>
+
+                                                <th scope="col ">gene_id</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-light">
+
+                                            <tr>
+                                                <td> 1</td>
+
+                                                <td>ATAD3C</td>
+
+                                                <td>HGNC:32151</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000378785</td>
+
+                                                <td>[&#39;intron variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>1</td>
+
+                                                <td>T</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>ENSG00000215915</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 2</td>
+
+                                                <td>ATAD3C</td>
+
+                                                <td>HGNC:32151</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000484537</td>
+
+                                                <td>[&#39;intron variant&#39;, &#39;non coding transcript variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>1</td>
+
+                                                <td>T</td>
+
+                                                <td>retained intron</td>
+
+                                                <td>ENSG00000215915</td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr class="table-success row_to_order" style="color:black;">
+                                <style>
+                                    [data-theme="dark"] .table-danger td {
+                                        background-color: rgb(172, 123, 123);
+                                    }
+                                    
+                                    [data-theme="dark"] .table-success td {
+                                        background-color: rgb(144, 175, 147);
+                                    }
+                                </style>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>976963</td>
+                                <td>A</td>
+                                <td>G</td>
+                                <td>Q</td>
+                                <td>R</td>
+                                <td>Benigno</td>
+                                <td>0.003281</td>
+                                <td>-0.628687</td>
+                                <td>-0.643091</td>
+                                <td>intron variant</td>
+
+                                <td>
+                                    <button type="button" class="btn btn-info" onclick="showConsequences('row_3')">Ver más</button>
+                                </td>
+
+                            </tr>
+
+                            <tr class="row_additional">
+                                <td colspan="13" style="padding:0;">
+                                    <table id="row_3" style="display:none;margin-bottom:0; z-index:-2" class="table table-bordered">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th scope="col"> Posibles consecuencias </th>
+
+                                                <th scope="col ">distance</th>
+
+                                                <th scope="col ">gene_symbol</th>
+
+                                                <th scope="col ">hgnc_id</th>
+
+                                                <th scope="col ">flags</th>
+
+                                                <th scope="col ">gene_symbol_source</th>
+
+                                                <th scope="col ">transcript_id</th>
+
+                                                <th scope="col ">consequence_terms</th>
+
+                                                <th scope="col ">impact</th>
+
+                                                <th scope="col ">variant_allele</th>
+
+                                                <th scope="col ">strand</th>
+
+                                                <th scope="col ">biotype</th>
+
+                                                <th scope="col ">gene_id</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-light">
+
+                                            <tr>
+                                                <td> 1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>PERM1</td>
+
+                                                <td>HGNC:28208</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000341290</td>
+
+                                                <td>[&#39;intron variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>G</td>
+
+                                                <td>-1</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>ENSG00000187642</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 2</td>
+
+                                                <td>1955.0</td>
+
+                                                <td>PLEKHN1</td>
+
+                                                <td>HGNC:25284</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000379407</td>
+
+                                                <td>[&#39;downstream gene variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>G</td>
+
+                                                <td>1</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>ENSG00000187583</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 3</td>
+
+                                                <td>1955.0</td>
+
+                                                <td>PLEKHN1</td>
+
+                                                <td>HGNC:25284</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000379409</td>
+
+                                                <td>[&#39;downstream gene variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>G</td>
+
+                                                <td>1</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>ENSG00000187583</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 4</td>
+
+                                                <td>1098.0</td>
+
+                                                <td>PLEKHN1</td>
+
+                                                <td>HGNC:25284</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000379410</td>
+
+                                                <td>[&#39;downstream gene variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>G</td>
+
+                                                <td>1</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>ENSG00000187583</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 5</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>PERM1</td>
+
+                                                <td>HGNC:28208</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000433179</td>
+
+                                                <td>[&#39;intron variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>G</td>
+
+                                                <td>-1</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>ENSG00000187642</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 6</td>
+
+                                                <td>322.0</td>
+
+                                                <td>PERM1</td>
+
+                                                <td>HGNC:28208</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000479361</td>
+
+                                                <td>[&#39;upstream gene variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>G</td>
+
+                                                <td>-1</td>
+
+                                                <td>retained intron</td>
+
+                                                <td>ENSG00000187642</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 7</td>
+
+                                                <td>1098.0</td>
+
+                                                <td>PLEKHN1</td>
+
+                                                <td>HGNC:25284</td>
+
+                                                <td>[&#39;cds start NF&#39;]</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000491024</td>
+
+                                                <td>[&#39;downstream gene variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>G</td>
+
+                                                <td>1</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>ENSG00000187583</td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr class="table-danger row_to_order" style="color:black;">
+                                <style>
+                                    [data-theme="dark"] .table-danger td {
+                                        background-color: rgb(172, 123, 123);
+                                    }
+                                    
+                                    [data-theme="dark"] .table-success td {
+                                        background-color: rgb(144, 175, 147);
+                                    }
+                                </style>
+                                <td>4</td>
+                                <td>X</td>
+                                <td>154185348</td>
+                                <td>G</td>
+                                <td>A</td>
+                                <td>R</td>
+                                <td>W</td>
+                                <td>Patógeno</td>
+                                <td>0.8351</td>
+                                <td>0.362185</td>
+                                <td>0.361335</td>
+                                <td>intron variant</td>
+
+                                <td>
+                                    <button type="button" class="btn btn-info" onclick="showConsequences('row_4')">Ver más</button>
+                                </td>
+
+                            </tr>
+
+                            <tr class="row_additional">
+                                <td colspan="13" style="padding:0;">
+                                    <table id="row_4" style="display:none;margin-bottom:0; z-index:-2" class="table table-bordered">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th scope="col"> Posibles consecuencias </th>
+
+                                                <th scope="col ">distance</th>
+
+                                                <th scope="col ">gene_symbol</th>
+
+                                                <th scope="col ">hgnc_id</th>
+
+                                                <th scope="col ">flags</th>
+
+                                                <th scope="col ">gene_symbol_source</th>
+
+                                                <th scope="col ">transcript_id</th>
+
+                                                <th scope="col ">consequence_terms</th>
+
+                                                <th scope="col ">impact</th>
+
+                                                <th scope="col ">variant_allele</th>
+
+                                                <th scope="col ">strand</th>
+
+                                                <th scope="col ">biotype</th>
+
+                                                <th scope="col ">gene_id</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-light">
+
+                                            <tr>
+                                                <td> 1</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>OPN1MW</td>
+
+                                                <td>HGNC:4206</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000595290</td>
+
+                                                <td>[&#39;intron variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>A</td>
+
+                                                <td>1</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>ENSG00000268221</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 2</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>OPN1MW</td>
+
+                                                <td>HGNC:4206</td>
+
+                                                <td>Sin datos</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000595330</td>
+
+                                                <td>[&#39;intron variant&#39;, &#39;non coding transcript variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>A</td>
+
+                                                <td>1</td>
+
+                                                <td>processed transcript</td>
+
+                                                <td>ENSG00000268221</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td> 3</td>
+
+                                                <td>4710.0</td>
+
+                                                <td>OPN1MW</td>
+
+                                                <td>HGNC:4206</td>
+
+                                                <td>[&#39;cds start NF&#39;]</td>
+
+                                                <td>HGNC</td>
+
+                                                <td>ENST00000596998</td>
+
+                                                <td>[&#39;upstream gene variant&#39;]</td>
+
+                                                <td>MODIFIER</td>
+
+                                                <td>A</td>
+
+                                                <td>1</td>
+
+                                                <td>protein coding</td>
+
+                                                <td>ENSG00000268221</td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+    </main>
+
+    <div class="cookie-container">
+        <p>
+            Este sitio solo usa cookies temporales con el fin de facilitar el uso y navegación en esta aplicación. Puedes obtener más información en la <a href="/policies">Política de cookies</a>
+        </p>
+        <button class="cookie-btn">¡Entendido!</button>
+    </div>
+
+    <script src="/static/js/dark-mode-switch.min.js"></script>
+    <script src="/static/js/app.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+    <script>
+        function copyToClipboard(text, el) {
+            var copyTest = document.queryCommandSupported('copy');
+            var elOriginalText = el.attr('data-original-title');
+
+            if (copyTest === true) {
+                var copyTextArea = document.createElement("textarea");
+                copyTextArea.value = text;
+                document.body.appendChild(copyTextArea);
+                document.execCommand("copy");
+                copyTextArea.select();
+                try {
+                    var successful = document.execCommand('copy');
+                    var msg = successful ? 'Copiado!' : 'Whoops, no ha podido ser!';
+                    el.attr('data-original-title', msg).tooltip('show');
+                } catch (err) {
+                    console.log('Whoops, no ha podido ser!');
+                }
+                document.body.removeChild(copyTextArea);
+                el.attr('data-original-title', elOriginalText);
+            } else {
+                window.prompt("Copiar al portapapeles: Ctrl+C o Command+C, Enter", text);
+            }
+        }
+
+        $(document).ready(function() {
+            $('.js-tooltip').tooltip();
+            $('.js-copy').click(function() {
+                var text = $(this).attr('data-copy');
+                var el = $(this);
+                copyToClipboard(text, el);
+            });
+        });
+
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js "></script>
+    <script>
+        // Muestra u oculta el panel de las consecuencias
+        function showConsequences(id) {
+
+            var x = document.getElementById(id);
+            if (x.style.display === "none") {
+                x.style.display = "inline-block";
+            } else {
+                x.style.display = "none ";
+            }
+        }
+
+        // Muestra la gráfica de Benignos y patógenos
+        new Chart(document.getElementById("pie-chart"), {
+            type: 'pie',
+            data: {
+                labels: ["Benignos ", "Patógenos"],
+                datasets: [{
+                    label: "Proporción de Benignos / Patógenos ",
+                    backgroundColor: ["#3cba9f", "#c45850"],
+                    data: "3,2 ".split(","),
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Proporción de Benignos / Patógenos'
+                },
+                maintainAspectRatio: true
+            }
+        });
+
+        // Muestra la gráfica de tipos de consecuencias
+        new Chart(document.getElementById("pie-chart2"), {
+            type: 'pie',
+            data: {
+                labels: "intron variant,missense variant ".split(","),
+                datasets: [{
+                    label: "Tipos de consecuencias ",
+                    data: "4,1 ".split(","),
+                    backgroundColor: "#02599c,#ffd700 ".split(","),
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Posibles consecuencias de las mutaciones'
+                },
+                maintainAspectRatio: true
+            }
+        });
+
+        document.getElementById("pie-chart").style.width = "100";
+        document.getElementById("pie-chart2").style.width = "100";
+
+        // Devuelve verdadero si la cadena 'num' es verdadera
+        function isNumeric(num) {
+            return !isNaN(num)
+        }
+        // Ordena la tabla en función de los elementos
+        function sortTable(n) {
+
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("tabla");
+
+            switching = true;
+            // Marcamos la dirección de ordenación como ascendente
+            dir = "asc";
+
+            /* Realizaremos el bucle hasta que no se realice ningún cambio */
+            while (switching) {
+
+                // Comenzamos indicando que no se ha realizado ningún cambio
+                switching = false;
+                rows = table.rows
+
+                /* Iteramos sobre todas las filas de la tabla excepto la primera, que es el header */
+                for (i = 1; i < (rows.length - 2); i = i + 2) {
+
+                    // Comenzamos indicando que no hay que intercambiar
+                    shouldSwitch = false;
+
+                    /* Cogemos los dos elementos adyacentes a comparar */
+                    x = rows[i].getElementsByTagName("TD")[n];
+
+                    //size = rows[i + 1].getElementsByTagName("TABLE")
+                    y = rows[i + 2].getElementsByTagName("TD")[n];
+
+                    /*
+                    En caso de que vayamos a ordenar la tabla por cromosoma, eliminamos la palabra
+                    cromosoma de la comprobación para tratarla como un enter
+                    */
+
+                    x = x.innerHTML.replace('X', 23);
+                    y = y.innerHTML.replace('X', 23);
+
+                    /* Dependiendo de si queremos ordenar la tabla de forma ascendente o descendente */
+                    // Si es ascendentemente
+
+                    if (dir == "asc") {
+                        // Si el valor a ordenar es numérico
+                        if (isNumeric(x)) {
+                            if (parseFloat(x) > parseFloat(y)) {
+                                // En caso de que el elemento x sea mayor que el elemento x+1, ordenamos y rompemos el bucle
+                                shouldSwitch = true;
+                                break;
+                            }
+
+                            // Si es una cadena
+                        } else {
+                            if (x.toLowerCase() > y.toLowerCase()) {
+
+                                // En caso de que el elemento x sea mayor que el elemento x+1, ordenamos y rompemos el bucle
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                        // Si es descendentemente
+                    } else if (dir == "desc") {
+                        // Si el valor a ordenar es numérico
+                        if (isNumeric(x)) {
+                            if (parseFloat(x) < parseFloat(y)) {
+                                // En caso de que el elemento x sea menor que el elemento x+1, ordenamos y rompemos el bucle
+                                shouldSwitch = true;
+                                break;
+                            }
+                            // Si es una cadena
+                        } else {
+                            if (x.toLowerCase() < y.toLowerCase()) {
+                                // En caso de que el elemento x sea menor que el elemento x+1, ordenamos y rompemos el bucle
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+
+                    try {
+                        // Metemos el tercer nodo delante del primero
+                        rows[i].parentNode.insertBefore(rows[i + 2], rows[i]);
+                        rows[i + 1].parentNode.insertBefore(rows[i + 3], rows[i + 1]);
+                    } catch (error) {
+                        console.error("ERROR" + error);
+                    }
+
+                    switching = true;
+
+                    // Cada vez que realizamos un cambio, incrementamos el contador de switch a 1
+                    switchcount++;
+
+                } else {
+                    /*Si no se ha realizado ningún cambio Y la dirección es "asc ",
+                    marcamos la dirección como "desc " y volvemos a correr el cambio. */
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+
+
+</body>
+
+
+</html>

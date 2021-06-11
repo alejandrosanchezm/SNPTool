@@ -1,0 +1,7 @@
+view\_functions module
+======================
+
+.. automodule:: view_functions
+   :members:
+   :undoc-members:
+   :show-inheritance:

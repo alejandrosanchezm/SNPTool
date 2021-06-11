@@ -1,0 +1,372 @@
+{% extends "public/templates/public_template.html" %}
+<!-- TÍTULO DE LA PÁGINA -->
+{% block title %} SNP TOOL - Resultados {% endblock %} {% block main %}
+
+<!-- TÍTULO DE LA CABECERA DE LA PÁGINA -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Resultados</h1>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<!-- INCLUIMOS EL MODAL CON LA TERMINOLOGÍA -->
+{% include 'public/resources/modal.html' %}
+
+<!-- CUERPO DE LA PÁGINA -->
+<div style="margin-left: 60px; margin-right: 60px;">
+    <div class="row">
+
+        <!-- TARJETA CON LA INFORMACIÓN DE LA PETICIÓN -->
+        <div class="card bg-light col-sm-12 col-md-12 col-lg-4">
+            <div class="card-body">
+                <!-- SI TIENE TÍTULO, LO MOSTRAMOS -->
+                {% if args['title'] %}
+                <div style="margin: 20px"><strong>  Título: </strong>{{ args['title'] }}</div>
+                {% endif %}
+                <!-- JOB_ID -->
+                <div style="margin: 20px"><strong> id: </strong>{{ args['job_id'] }}
+                    <!-- BOTÓN PARA COPIAR EL JOB_ID -->
+                    <button style="background-color: rgba(226, 226, 226, 0.712);" type="button" class="btn btn-default btn-copy js-tooltip js-copy" id="copy_btn" data-toggle="tooltip" data-placement="bottom" data-copy="{{ args['job_id'] }}" title="Copiar Job ID al portapapeles">                    
+                        &#8203
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" version="1.1" width="18" height="18"
+                             viewBox="0 0 24 24"><path d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" /></svg>
+                    </button>
+                </div>
+                <!-- TIMESTAMP DE LA PETICIÓN -->
+                <div style="margin: 20px"><strong> Fecha y hora: </strong>{{ args['timestamp'] }}</div>
+                <div style="margin-top:35px; margin-left:30px;">
+                    <span>
+                        <!-- BOTÓN PARA DESCARGAR EL FICHERO CSV -->
+                        <a href="/download_csv_file/{{ args['job_id'] }}"><button type="button" style="margin-right:20px; margin-bottom: 20px;" class="btn btn-info">Descargar archivo CSV
+                        </button></a>
+                        <!-- BOTÓN PARA ABRIR LA TERMINOLOGÍA -->
+                    <button style="margin-right:20px; margin-bottom: 20px;" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">Terminología</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TARJETAS DE LOS GRÁFICOS (SE MUESTRA SI HAY MÁS DE UNA LÍNEA DE RESULTADOS) -->
+        <hr> {% if args['show'] == True %}
+        <!-- GRÁFICO 1 (BENIGNOS - PATÓGENOS) -->
+        <div class="card col-3 bg-light d-none d-lg-block d-xl-block">
+            <div class="card-body bg-light text-center  my-auto" style="height: 250px; overflow-x: hidden;">
+                <canvas id="pie-chart" height="150"></canvas>
+            </div>
+        </div>
+        <!-- GRÁFICO 2 (CONSECUENCIAS MÁS SEVERAS) -->
+        <div class="card col-3 bg-light d-none d-lg-block d-xl-block">
+            <div class="card-body bg-light text-center my-auto" style="height: 250px; overflow-x: hidden;">
+                <canvas id="pie-chart2" height="150"></canvas>
+            </div>
+        </div>
+
+    </div>
+    {% endif %}
+    <div>
+        <div style="overflow-x:auto;">
+            <!-- TABLA CON LOS RESULTADOS -->
+            <table class="table bg-light" id="tabla" style="font-size: 15px;">
+                <!-- CABECERA DE LA TABLA -->
+                <thead class="bg-light">
+                    <tr>
+                        <th scope="col" onclick="sortTable(0)"> # </th>
+                        <th scope="col" onclick="sortTable(1)">Cromosoma (hg19)</th>
+                        <th scope="col" onclick="sortTable(2)">Posición hg19(1-based)</th>
+                        <th scope="col" onclick="sortTable(3)">Alelo de Referencia</th>
+                        <th scope="col" onclick="sortTable(4)">Alelo alternativo</th>
+                        <th scope="col" onclick="sortTable(5)">Aminoácido de referencia</th>
+                        <th scope="col" onclick="sortTable(6)">Aminoácido alternativo</th>
+                        <th scope="col" onclick="sortTable(7)">Predicción</th>
+                        <th scope="col" onclick="sortTable(8)" data-bs-toggle="tooltip" data-bs-placement="top" title="Más cercanos a 0 son benignos, más cercanos a 1 son patógenos.">ClinPred score</th>
+                        <th scope="col" onclick="sortTable(9)" data-bs-toggle="tooltip" data-bs-placement="top" title="Rango: -1,11707 a 0,750927. Cuanto mayor sea la puntuación, más probable es que la variante sea patógena. Se sugiere un corte entre deletéreo ('D') y tolerante ('T') en 0,0692655.">BayesDel_addAF score</th>
+                        <th scope="col" onclick="sortTable(10)" data-bs-toggle="tooltip" data-bs-placement="top" title="Rango: -1,31914 a 0,840878. Cuanto mayor sea la puntuación, más probable es que la variante sea patógena. Se sugiere un corte entre perjudicial ('D') y tolerado ('T') es -0,0570105.">BayesDel_noAF score</th>
+                        <th scope="col" onclick="sortTable(11)">Consecuencia más severa</th>
+                        <th scope="col">Posibles consecuencias</th>
+                    </tr>
+                </thead>
+                <!-- CUERPO DE LA TABLA -->
+                <tbody id="MyTable">
+                    {% set count = namespace(value=0) %} {% for item in args['my_data'] %}
+                    <tr class="{{ item.code }} row_to_order" style="color:black;">
+                        <style>
+                            [data-theme="dark"] .table-danger td {
+                                background-color: rgb(172, 123, 123);
+                            }
+                            
+                            [data-theme="dark"] .table-success td {
+                                background-color: rgb(144, 175, 147);
+                            }
+                        </style>
+                        <td>{{ count.value }}</td>
+                        <!-- ÍNDICE DE LA FILA -->
+                        <td>{{ item.hg19_chr }}</td>
+                        <!-- CROMOSOMA -->
+                        <td>{{ item.hg19_pos }}</td>
+                        <!-- POSICIÓN -->
+                        <td>{{ item.ref }}</td>
+                        <!-- ALELO DE REFERENCIA -->
+                        <td>{{ item.alt }}</td>
+                        <!-- ALELO ALTERNATIVO -->
+                        <td>{{ item.aaref }}</td>
+                        <!-- AMINOÁCIDO DE REFERENCIA -->
+                        <td>{{ item.aaalt }}</td>
+                        <!-- AMINOÁCIDO ALTERNATIVO -->
+                        <td>{{ item.prediction }}</td>
+                        <!-- PREDICCIÓN -->
+                        <td>{{ item.ClinPred_Score }}</td>
+                        <!-- CLINPREDSCORE -->
+                        <td>{{ item.BayesDel_addAF_score }}</td>
+                        <!-- BAYESDEL ADDAF SCORE -->
+                        <td>{{ item.BayesDel_noAF_score }}</td>
+                        <!-- BAYESDEL NOAF SCORE -->
+                        <td>{{ item.most_severe_consequence }}</td>
+                        <!-- CONSECUENCIA MÁS SEVERA -->
+                        {% if item.transcript_consequences != "Sin datos" %}
+                        <!-- SI HAY DATOS, MOSTRAMOS UN BOTÓN -->
+                        <td>
+                            <button type="button" class="btn btn-info" onclick="showConsequences('row_{{ count.value }}')">Ver más</button>
+                        </td>
+                        {% else %}
+                        <!-- SI NO HAY DATOS, MOSTRAMOS LA FRASE SIN DATOS -->
+                        <td>
+                            Sin datos
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% if item.transcript_consequences != "Sin datos" %}
+                    <!-- SI HAY DATOS, AÑADIMOS LA TABLA CON LOS DATOS ADICIONALES -->
+                    <tr class="row_additional">
+                        <td colspan="13" style="padding:0;">
+                            <table id="row_{{ count.value }}" style="display:none;margin-bottom:0; z-index:-2" class="table table-bordered">
+                                <thead class="bg-light">
+                                    <!-- CABECERA DE LA TABLA ADICIONAL -->
+                                    <tr>
+                                        <th scope="col"> Posibles consecuencias </th>
+                                        {% for key in item.transcript_consequences['columns'] %}
+                                        <th scope="col ">{{ key }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-light">
+                                    <!-- CUERPO DE LA TABLA ADICIONAL -->
+                                    {% for key, value in item.transcript_consequences.items() %} {% if 'columns' not in key %}
+                                    <tr>
+                                        <td> {{ key | int + 1}}</td>
+                                        {% for val in value %}
+                                        <td>{{ val }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endif %} {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    {% endif %} {% set count.value = count.value + 1 %} {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% if args['registro'] %}
+    <!-- EN CASO DE QUE EXISTA UN REGISTRO DE ERRORES, LO MOSTRAMOS -->
+    <div class="container">
+        <div id="error_msgs">
+            <div class="card bg-light">
+                <div class="card-header bg-danger" id="headingErrors">
+                    <h5 class="mb-0">
+                        <button class="btn bg-danger text-light " data-toggle="collapse" data-target="#collapseErrors" aria-expanded="false" aria-controls="collapseErrors">
+                        Mensajes de error
+                    </button>
+                    </h5>
+                </div>
+
+                <div id="collapseErrors" class="collapse" aria-labelledby="headingErrors" data-parent="#error_msgs ">
+                    <div class="card-body" style="background-color: bisque; ">
+                        <p>Estas son las líneas que han sido descartadas:</p>
+                        <ul>
+                            {% for line in args['registro'] %}
+                            <li>
+                                <p>{{ line }}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- INCLUIMOS EL SCRIPT DE LOS TOOLTIPS -->
+{% endblock %} {% block script %} {% include 'public/resources/tooltip.html' %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js "></script>
+<script>
+    // Muestra u oculta el panel de las consecuencias
+    function showConsequences(id) {
+
+        var x = document.getElementById(id);
+        if (x.style.display === "none") {
+            x.style.display = "inline-block";
+        } else {
+            x.style.display = "none ";
+        }
+    }
+
+    // Muestra la gráfica de Benignos y patógenos
+    new Chart(document.getElementById("pie-chart"), {
+        type: 'pie',
+        data: {
+            labels: ["Benignos ", "Patógenos"],
+            datasets: [{
+                label: "Proporción de Benignos / Patógenos ",
+                backgroundColor: ["#3cba9f", "#c45850"],
+                data: "{{ args['graph_1'] }} ".split(","),
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Proporción de Benignos / Patógenos'
+            },
+            maintainAspectRatio: true
+        }
+    });
+
+    // Muestra la gráfica de tipos de consecuencias
+    new Chart(document.getElementById("pie-chart2"), {
+        type: 'pie',
+        data: {
+            labels: "{{ args['unique'] }} ".split(","),
+            datasets: [{
+                label: "Tipos de consecuencias ",
+                data: "{{ args['count'] }} ".split(","),
+                backgroundColor: "{{ args['colours'] }} ".split(","),
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Posibles consecuencias de las mutaciones'
+            },
+            maintainAspectRatio: true
+        }
+    });
+
+    document.getElementById("pie-chart").style.width = "100";
+    document.getElementById("pie-chart2").style.width = "100";
+
+    // Devuelve verdadero si la cadena 'num' es verdadera
+    function isNumeric(num) {
+        return !isNaN(num)
+    }
+    // Ordena la tabla en función de los elementos
+    function sortTable(n) {
+
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("tabla");
+
+        switching = true;
+        // Marcamos la dirección de ordenación como ascendente
+        dir = "asc";
+
+        /* Realizaremos el bucle hasta que no se realice ningún cambio */
+        while (switching) {
+
+            // Comenzamos indicando que no se ha realizado ningún cambio
+            switching = false;
+            rows = table.rows
+
+            /* Iteramos sobre todas las filas de la tabla excepto la primera, que es el header */
+            for (i = 1; i < (rows.length - 2); i = i + 2) {
+
+                // Comenzamos indicando que no hay que intercambiar
+                shouldSwitch = false;
+
+                /* Cogemos los dos elementos adyacentes a comparar */
+                x = rows[i].getElementsByTagName("TD")[n];
+
+                //size = rows[i + 1].getElementsByTagName("TABLE")
+                y = rows[i + 2].getElementsByTagName("TD")[n];
+
+                /*
+                En caso de que vayamos a ordenar la tabla por cromosoma, eliminamos la palabra
+                cromosoma de la comprobación para tratarla como un enter
+                */
+
+                x = x.innerHTML.replace('X', 23);
+                y = y.innerHTML.replace('X', 23);
+
+                /* Dependiendo de si queremos ordenar la tabla de forma ascendente o descendente */
+                // Si es ascendentemente
+
+                if (dir == "asc") {
+                    // Si el valor a ordenar es numérico
+                    if (isNumeric(x)) {
+                        if (parseFloat(x) > parseFloat(y)) {
+                            // En caso de que el elemento x sea mayor que el elemento x+1, ordenamos y rompemos el bucle
+                            shouldSwitch = true;
+                            break;
+                        }
+
+                        // Si es una cadena
+                    } else {
+                        if (x.toLowerCase() > y.toLowerCase()) {
+
+                            // En caso de que el elemento x sea mayor que el elemento x+1, ordenamos y rompemos el bucle
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                    // Si es descendentemente
+                } else if (dir == "desc") {
+                    // Si el valor a ordenar es numérico
+                    if (isNumeric(x)) {
+                        if (parseFloat(x) < parseFloat(y)) {
+                            // En caso de que el elemento x sea menor que el elemento x+1, ordenamos y rompemos el bucle
+                            shouldSwitch = true;
+                            break;
+                        }
+                        // Si es una cadena
+                    } else {
+                        if (x.toLowerCase() < y.toLowerCase()) {
+                            // En caso de que el elemento x sea menor que el elemento x+1, ordenamos y rompemos el bucle
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (shouldSwitch) {
+
+                try {
+                    // Metemos el tercer nodo delante del primero
+                    rows[i].parentNode.insertBefore(rows[i + 2], rows[i]);
+                    rows[i + 1].parentNode.insertBefore(rows[i + 3], rows[i + 1]);
+                } catch (error) {
+                    console.error("ERROR" + error);
+                }
+
+                switching = true;
+
+                // Cada vez que realizamos un cambio, incrementamos el contador de switch a 1
+                switchcount++;
+
+            } else {
+                /*Si no se ha realizado ningún cambio Y la dirección es "asc ",
+                marcamos la dirección como "desc " y volvemos a correr el cambio. */
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
+{% endblock %}

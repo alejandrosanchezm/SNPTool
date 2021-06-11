@@ -1,0 +1,225 @@
+{% extends "public/templates/public_template.html" %}
+
+<!-- TÍTULO DE LA PÁGINA -->
+{% block title %} SNP Tool {% endblock %} {% block main %}
+
+<!-- CUERPO DE LA PÁGINA -->
+<div class="d-flex" id="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <!-- TÍTULO -->
+                <!--<h1 style="margin-top: 10px;">SNP Tool</h1>-->
+                <img src="{{ url_for('static',filename='imgs/Titulo.png') }}" class="rounded d-none d-lg-block d-xl-block" alt="SNPTool" style="width: 18%; margin-left:5%; margin-top:15px; margin-bottom: 35px;">
+                <img src="{{ url_for('static',filename='imgs/Titulo.png') }}" class="rounded d-sm-block d-md-block d-lg-none" alt="SNPTool" style="width: 58%; margin-left:15%; margin-top:15px; margin-bottom: 35px;">
+                <hr>
+                <!-- APARTADO SOBRE LA INFORMACION PARA INTRODUCIR LOS DATOS EN LA APLICACIÓN -->
+                {% include 'public/resources/input_information.html' %}
+
+                <!-- MODAL CON LAS REFERENCIAS A LOS SÍMBOLOS PARA LAS BASES Y AMINOÁCIDOS -->
+                {% include 'public/resources/modal.html' %}
+                <hr>
+
+                <!-- FORMULARIO PARA INTRODUCIR LOS DATOS -->
+                <form action="/" method="POST" enctype="multipart/form-data">
+                    <div class="card bg-light">
+
+                        <!-- TARJETA PARA INTRODUCIR LOS DATOS MANUALMENTE -->
+                        <div class="card-header">
+                            <h5>Introduce tu consulta</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="form-row" style="margin:15px">
+                                <div class="col">
+                                    <label for="inputJobTitle">Nombre de la petición <span style="font-size: 12px" class="badge badge-pill badge-info"> Opcional</span></label>
+                                    <!-- TÍTULO DE LA PETICIÓN -->
+                                    <input type="text" maxlength="500" class="form-control bg-light" name="inputJobTitle" id="inputJobTitle" placeholder="Título del proyecto (máximo 30 caracteres)" maxlength="30">
+                                </div>
+                            </div>
+                            <div class="form-group shadow-textarea">
+                                <label for="data_input1">&#8203</label>
+                                <textarea id="data_input1" name="data_input1" class="form-control z-depth-1 bg-light" rows="10" placeholder="1,955563,G,C,R,P"></textarea>
+                            </div>
+                            <span>
+                                <!-- BOTÓN DE CARGAR DATOS DE EJEMPLO -->
+                                <button style="margin:5px" type="button" class="btn btn-info" id="filldata1" >Cargar datos de ejemplo</button>
+                                <!-- BOTÓN DE MOSTRAR RESULTADOS DE EJEMPLO -->
+                                <button style="margin:5px" type="button" class="btn btn-info" id="loadexample1" onclick="window.location.href='/load_example'" >Mostrar resultados de ejemplo</button>
+                                <!-- BOTÓN DE DESCARGAR ARCHIVO DE POSICIONES -->
+                                <button style="margin:5px" type="button" class="btn btn-info" onclick="window.location.href='/download_pos_file'">Descargar archivo de posiciones válidas</button>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- TARJETA PARA LA SUBIDA DEL ARCHIVO -->
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <div class="custom-file">
+                                <label for="file">O sube un archivo</label>
+                                <input type="file" id="file" name="file" class="form-control-file" id="exampleFormControlFile1" oninput="filesize(this);">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BOTÓN DE EVALUAR -->
+                    <div class="card bg-light">
+                        <div class="card-header">
+                            <button type="submit" class="btn btn-info " style="margin:10px;">Evaluar</button>
+                        </div>
+                    </div>
+
+                    <hr>
+                </form>
+
+                <!-- APARTADO DONDE SE MUESTRAN LOS TRABAJOS REALIZADOS ANTERIORMENTE -->
+                <!-- SI HA REALIZADO TRABAJOS -->
+                {% if args['my_jobs'] != None %}
+                <div class="jobs bg-light d-none d-lg-block d-xl-block">
+                    <!-- CARD HEAD -->
+                    <div class="card bg-light" id="jobs_card">
+                        <div class="card-header">
+                            <h5>Trabajos recientes</h5>
+                        </div>
+                    </div>
+                    <table class="table table-bordered" id="jobs_table" style="background-color: rgb(248, 248, 248);">
+
+                        <!-- CABECERA DE LA TABLA -->
+                        <thead class="bg-light">
+                            <th scope="col" title="Título del trabajo (Opcional).">Título</th>
+                            <th scope="col" title="Fecha y hora de creación del trabajo.">Fecha y hora</th>
+                            <th scope="col" title="Identificador del trabajo. Sirve para buscar una petición realizada anteriormente.">Job id</th>
+                            <th scope="col" title="Opciones para los trabajos.">Opciones</th>
+                        </thead>
+                        <!-- CUERPO DE LA TABLA -->
+                        <tbody>
+                            {% for item in args['my_jobs'] %}
+                            <tr id="item_{{ item.id }}" class="bg-light">
+                                <td>{{ item.title }}</td>
+                                <!-- TÍTULO DEL TRABAJO    -->
+                                <td>{{ item.timestamp }}</td>
+                                <!-- TIMESTAMP DEL TRABAJO -->
+                                <td>{{ item.id }}</td>
+                                <!-- JOB_ID DE LA PETICIÓN -->
+                                <td>
+                                    <!-- BOTONES DE OPCIONES   -->
+                                    <div class="btn-group" role="group">
+                                        <!-- BOTON DE MOSTRAR RESULTADOS -->
+                                        <button type="button" class="btn js-tooltip bg-light" data-toggle="tooltip" title="Te redirige a la página con los resultados de este trabajo." onclick="window.location.href='/loading/{{ item.id }}'">Mostrar resultados</button>
+                                        <!-- BOTON DE ELIMINAR RESULTADOS -->
+                                        <button type="button" class="btn js-tooltip bg-light" data-toggle="tooltip" title="Elimina el trabajo de la base de datos." onclick="deleteRow('{{ item.id }}')">Eliminar trabajo</button>
+                                        <!-- BOTON DE COPIAR JOB_ID -->
+                                        <button type="button" class="btn btn-default btn-copy js-tooltip js-copy bg-light" id="copy_btn" data-toggle="tooltip" data-placement="bottom" data-copy="{{ item.id }}" title="Copiar Job ID al portapapeles">                    
+                                            &#8203
+                                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                                 width="24" height="24" viewBox="0 0 24 24"><path d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" /></svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- SI NO HA REALIZADO NINGUN TRABAJO -->
+                {% endif %}
+                <div class="card bg-light" id="card_no_jobs">
+                    <!-- SIRVE PARA CUANDO SE ELIMINAN TODOS LOS TRABAJOS -->
+                    {% if args['my_jobs'] != None %}
+                    <style>
+                        #card_no_jobs {
+                            display: none;
+                        }
+                    </style>
+                    {% endif %}
+                    <div class="card-header">
+                        <h5>¡No hay trabajos recientes!</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TARJETAS LATERALES DE LA APLICACIÓN -->
+
+    <div class="bd-example d-none d-sm-none d-md-block">
+
+        <div class="card card_info bg-light">
+            <div class="card-body ">
+                <p class="card-title ">Estadísticas de usuario</p>
+                <p>Número de visitantes</p>
+                <span>{{ args['n_visitors'] }}</span>
+                <hr>
+                <p>Número de trabajos</p>
+                <span>{{ args['n_jobs'] }}</span>
+            </div>
+        </div>
+
+        <div class="card text-center card_info bg-light">
+            <div class="card-body">
+                <p class="card-title ">Datos de contacto</p>
+                <a href="mailto: {{ email }} " class="btn btn-info">Email: {{ args['email'] }}</a>
+                <button type="button" id="error_btn" class="btn btn-info" data-toggle="modal" data-target="#error_notification" style="margin-top:15px;font-size: 12px;width: 95%;">
+                    Notificar un error
+                </button> {% include 'public/resources/error_notification.html' %}
+            </div>
+        </div>
+
+        <div class="card text-center card_info bg-light">
+            <div class="card-body">
+                <p>Enlaces de interés</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %} {% block script %}
+
+<!-- INCLUIMOS EL SCRIPT DE LOS TOOLTIPS -->
+{% include 'public/resources/tooltip.html' %}
+
+<script>
+    const fillBtn = document.querySelector("#filldata1 ");
+    const textarea = document.querySelector("#data_input1 ");
+
+    fillBtn.addEventListener("click", () => {
+        var e = document.getElementById("inlineFormCustomSelect");
+        textarea.value = `1,955563,G,C,R,P\n1,976598,C,T,T,I\n1,1464679,C,T,R,W\n1,976963,A,G,Q,R\nX,154185348,G,A,R,W`;
+    });
+
+    function filesize(elem) {
+        document.cookie = `filesize=${elem.files[0].size}`
+    }
+
+    // ',
+    function deleteRow(id) {
+        $.ajax({
+            url: 'http://37.35.239.182:5000/delete/' + id,
+            type: "GET",
+            dataType: "json",
+            async: true,
+            timeout: 2 * 60 * 60 * 1000,
+            success: function(resp) {
+                console.log(resp);
+                var n_jobs = document.getElementById("jobs_table").rows.length;
+                if (n_jobs == 2) {
+                    document.getElementById("jobs_table").style.display = "none";
+                    document.getElementById("jobs_card").style.display = "none";
+                    document.getElementById("card_no_jobs").style.display = "block";
+                    var elems = document.getElementsByClassName("tooltip");
+                    elems.forEach(element => {
+                        element.style.display = "none";
+                    });
+                } else if (n_jobs > 2) {
+                    $("#item_" + id).remove();
+                }
+                return;
+            }
+        });
+    }
+</script>
+{% endblock %}

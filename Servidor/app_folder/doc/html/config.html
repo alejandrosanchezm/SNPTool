@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>config module &mdash; documentación de SNP Tool - 1.0</title>
+
+
+
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+
+
+
+
+
+
+
+
+
+    <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+
+
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="data_structs module" href="data_structs.html" />
+    <link rel="prev" title="app package" href="app.html" />
+</head>
+
+<body class="wy-body-for-nav">
+
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-scroll">
+                <div class="wy-side-nav-search">
+
+
+
+                    <a href="index.html" class="icon icon-home"> SNP Tool
+          
+
+          
+          </a>
+
+
+
+
+
+
+
+                    <div role="search">
+                        <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+                            <input type="text" name="q" placeholder="Buscar documentos" />
+                            <input type="hidden" name="check_keywords" value="yes" />
+                            <input type="hidden" name="area" value="default" />
+                        </form>
+                    </div>
+
+
+                </div>
+
+
+                <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+
+
+
+                    <p class="caption"><span class="caption-text">Contenidos:</span></p>
+                    <ul class="current">
+                        <li class="toctree-l1 current"><a class="reference internal" href="modules.html">app_folder</a>
+                            <ul class="current">
+                                <li class="toctree-l2"><a class="reference internal" href="app.html">app package</a></li>
+                                <li class="toctree-l2 current"><a class="current reference internal" href="#">config module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="data_structs.html">data_structs module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="init_functions.html">init_functions module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="messages.html">messages module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="run_app.html">run_app module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="task_functions.html">task_functions module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="tasks.html">tasks module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="view_functions.html">view_functions module</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
+
+                </div>
+
+            </div>
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+            <nav class="wy-nav-top" aria-label="top navigation">
+
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="index.html">SNP Tool</a>
+
+            </nav>
+
+
+            <div class="wy-nav-content">
+
+                <div class="rst-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div role="navigation" aria-label="breadcrumbs navigation">
+
+                        <ul class="wy-breadcrumbs">
+
+                            <li>
+                                <a href="index.html" class="icon icon-home"></a> &raquo;</li>
+
+                            <li><a href="modules.html">app_folder</a> &raquo;</li>
+
+                            <li>config module</li>
+
+
+                            <li class="wy-breadcrumbs-aside">
+
+
+                                <a href="_sources/config.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+
+
+                            </li>
+
+                        </ul>
+
+
+                        <hr/>
+                    </div>
+                    <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+                        <div itemprop="articleBody">
+
+                            <div class="section" id="module-config">
+                                <span id="config-module"></span>
+                                <h1>config module<a class="headerlink" href="#module-config" title="Enlazar permanentemente con este título">¶</a></h1>
+                                <dl class="py class">
+                                    <dt class="sig sig-object py" id="config.Config">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">config.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><a class="headerlink" href="#config.Config" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.ADMIN_EMAIL">
+<span class="sig-name descname"><span class="pre">ADMIN_EMAIL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'alejandrosanchezm&#64;usal.es'</span></em><a class="headerlink" href="#config.Config.ADMIN_EMAIL" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.ALLOWED_FILE_EXTENSIONS">
+<span class="sig-name descname"><span class="pre">ALLOWED_FILE_EXTENSIONS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">['CSV',</span> <span class="pre">'TXT',</span> <span class="pre">'XLSX',</span> <span class="pre">'VCF']</span></em><a class="headerlink" href="#config.Config.ALLOWED_FILE_EXTENSIONS" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.CELERY_BROKER_URL">
+<span class="sig-name descname"><span class="pre">CELERY_BROKER_URL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'redis://localhost:6379/0'</span></em><a class="headerlink" href="#config.Config.CELERY_BROKER_URL" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.CELERY_RESULT_BACKEND">
+<span class="sig-name descname"><span class="pre">CELERY_RESULT_BACKEND</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'redis://localhost:6379/0'</span></em><a class="headerlink" href="#config.Config.CELERY_RESULT_BACKEND" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.CLIENT_FILES">
+<span class="sig-name descname"><span class="pre">CLIENT_FILES</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'/mnt/c/wsl/server/app_folder/app/static/client/'</span></em><a class="headerlink" href="#config.Config.CLIENT_FILES" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.CONNECT">
+<span class="sig-name descname"><span class="pre">CONNECT</span></span><em class="property"><span class="pre">:</span> <span class="pre">False</span></em><a class="headerlink" href="#config.Config.CONNECT" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.DB_NAME">
+<span class="sig-name descname"><span class="pre">DB_NAME</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'production-db'</span></em><a class="headerlink" href="#config.Config.DB_NAME" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.DB_PASSWORD">
+<span class="sig-name descname"><span class="pre">DB_PASSWORD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'example'</span></em><a class="headerlink" href="#config.Config.DB_PASSWORD" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.DB_USERNAME">
+<span class="sig-name descname"><span class="pre">DB_USERNAME</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'root'</span></em><a class="headerlink" href="#config.Config.DB_USERNAME" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.DEBUG">
+<span class="sig-name descname"><span class="pre">DEBUG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#config.Config.DEBUG" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.LOCALHOST">
+<span class="sig-name descname"><span class="pre">LOCALHOST</span></span><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#config.Config.LOCALHOST" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.LOG_FILES">
+<span class="sig-name descname"><span class="pre">LOG_FILES</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'/mnt/c/wsl/server/app_folder/app/logs/'</span></em><a class="headerlink" href="#config.Config.LOG_FILES" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.MAX_CONTENT_LENGTH">
+<span class="sig-name descname"><span class="pre">MAX_CONTENT_LENGTH</span></span><em class="property"> <span class="pre">=</span> <span class="pre">15000000</span></em><a class="headerlink" href="#config.Config.MAX_CONTENT_LENGTH" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.MONGO_SERVICE">
+<span class="sig-name descname"><span class="pre">MONGO_SERVICE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'local'</span></em><a class="headerlink" href="#config.Config.MONGO_SERVICE" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.PICKLE_FILES">
+<span class="sig-name descname"><span class="pre">PICKLE_FILES</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'/mnt/c/wsl/server/app_folder/app/pickles/'</span></em><a class="headerlink" href="#config.Config.PICKLE_FILES" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.SECRET_KEY">
+<span class="sig-name descname"><span class="pre">SECRET_KEY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OCML3BRawWEUeaxcuKHLpw'</span></em><a class="headerlink" href="#config.Config.SECRET_KEY" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.SERVER_FILES">
+<span class="sig-name descname"><span class="pre">SERVER_FILES</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'/mnt/c/wsl/server/app_folder/app/static/server/'</span></em><a class="headerlink" href="#config.Config.SERVER_FILES" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.SESSION_COOKIE_SECURE">
+<span class="sig-name descname"><span class="pre">SESSION_COOKIE_SECURE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#config.Config.SESSION_COOKIE_SECURE" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.TESTING">
+<span class="sig-name descname"><span class="pre">TESTING</span></span><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#config.Config.TESTING" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.TMP_FILES">
+<span class="sig-name descname"><span class="pre">TMP_FILES</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'/mnt/c/wsl/server/app_folder/app/static/tmp/'</span></em><a class="headerlink" href="#config.Config.TMP_FILES" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.Config.WELL_FILES">
+<span class="sig-name descname"><span class="pre">WELL_FILES</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'/mnt/c/wsl/server/app_folder/app/static/well_know/pki-validation/'</span></em><a class="headerlink" href="#config.Config.WELL_FILES" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                    </dd>
+                                </dl>
+
+                                <dl class="py class">
+                                    <dt class="sig sig-object py" id="config.DevelopmentConfig">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">config.</span></span><span class="sig-name descname"><span class="pre">DevelopmentConfig</span></span><a class="headerlink" href="#config.DevelopmentConfig" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Bases: <a class="reference internal" href="#config.Config" title="config.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">config.Config</span></code></a></p>
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.DevelopmentConfig.CONNECT">
+<span class="sig-name descname"><span class="pre">CONNECT</span></span><em class="property"><span class="pre">:</span> <span class="pre">False</span></em><a class="headerlink" href="#config.DevelopmentConfig.CONNECT" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.DevelopmentConfig.DB_NAME">
+<span class="sig-name descname"><span class="pre">DB_NAME</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'development-db'</span></em><a class="headerlink" href="#config.DevelopmentConfig.DB_NAME" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.DevelopmentConfig.DB_PASSWORD">
+<span class="sig-name descname"><span class="pre">DB_PASSWORD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'example'</span></em><a class="headerlink" href="#config.DevelopmentConfig.DB_PASSWORD" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.DevelopmentConfig.DB_USERNAME">
+<span class="sig-name descname"><span class="pre">DB_USERNAME</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'root'</span></em><a class="headerlink" href="#config.DevelopmentConfig.DB_USERNAME" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.DevelopmentConfig.DEBUG">
+<span class="sig-name descname"><span class="pre">DEBUG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#config.DevelopmentConfig.DEBUG" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                    </dd>
+                                </dl>
+
+                                <dl class="py class">
+                                    <dt class="sig sig-object py" id="config.ProductionConfig">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">config.</span></span><span class="sig-name descname"><span class="pre">ProductionConfig</span></span><a class="headerlink" href="#config.ProductionConfig" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Bases: <a class="reference internal" href="#config.Config" title="config.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">config.Config</span></code></a></p>
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.ProductionConfig.CONNECT">
+<span class="sig-name descname"><span class="pre">CONNECT</span></span><em class="property"><span class="pre">:</span> <span class="pre">False</span></em><a class="headerlink" href="#config.ProductionConfig.CONNECT" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                    </dd>
+                                </dl>
+
+                                <dl class="py class">
+                                    <dt class="sig sig-object py" id="config.TestingConfig">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">config.</span></span><span class="sig-name descname"><span class="pre">TestingConfig</span></span><a class="headerlink" href="#config.TestingConfig" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Bases: <a class="reference internal" href="#config.Config" title="config.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">config.Config</span></code></a></p>
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.TestingConfig.CONNECT">
+<span class="sig-name descname"><span class="pre">CONNECT</span></span><em class="property"><span class="pre">:</span> <span class="pre">False</span></em><a class="headerlink" href="#config.TestingConfig.CONNECT" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.TestingConfig.DB_NAME">
+<span class="sig-name descname"><span class="pre">DB_NAME</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'development-db'</span></em><a class="headerlink" href="#config.TestingConfig.DB_NAME" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.TestingConfig.DB_PASSWORD">
+<span class="sig-name descname"><span class="pre">DB_PASSWORD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'example'</span></em><a class="headerlink" href="#config.TestingConfig.DB_PASSWORD" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.TestingConfig.DB_USERNAME">
+<span class="sig-name descname"><span class="pre">DB_USERNAME</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'root'</span></em><a class="headerlink" href="#config.TestingConfig.DB_USERNAME" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                        <dl class="py attribute">
+                                            <dt class="sig sig-object py" id="config.TestingConfig.TESTING">
+<span class="sig-name descname"><span class="pre">TESTING</span></span><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#config.TestingConfig.TESTING" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                            <dd></dd>
+                                        </dl>
+
+                                    </dd>
+                                </dl>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <footer>
+                        <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+                            <a href="data_structs.html" class="btn btn-neutral float-right" title="data_structs module" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+                            <a href="app.html" class="btn btn-neutral float-left" title="app package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+                        </div>
+
+                        <hr/>
+
+                        <div role="contentinfo">
+                            <p>
+                                &#169; Derechos de autor 2021, Alejandro Sánchez Marcos.
+
+                            </p>
+                        </div>
+
+
+
+                        Construido con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+
+                        <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a> proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+
+                    </footer>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script type="text/javascript">
+        jQuery(function() {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>

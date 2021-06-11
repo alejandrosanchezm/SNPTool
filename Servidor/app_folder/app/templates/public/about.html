@@ -1,0 +1,145 @@
+{% extends "public/templates/public_template.html" %} {% block title %} SNP TOOL - Sobre la aplicación{% endblock %} {% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Sobre la aplicación</h1>
+            <hr>
+            <p>
+                SNP Tool es una aplicación de clasificación de <strong><a href="https://es.wikipedia.org/wiki/Polimorfismo_de_nucle%C3%B3tido_%C3%BAnico">Polimorfismos de nucleótido único (SNP)</a></strong> basada en algoritmos de Inteligencia Artificial.
+                La aplicación utiliza como base unos metapredictores de los siguientes 'scores':
+            </p>
+            <ul>
+                <li>
+                    <strong><a href="https://fengbj-laboratory.org/BayesDel/BayesDel.html">BayesDel Score.</a></strong> Los datasets con los Scores precalculados pueden extraerse del siguiente <a href="https://drive.google.com/drive/folders/1K4LI6ZSsUGBhHoChUtegC8bgCt7hbQlA">link.</a>
+                </li>
+                <li>
+                    <strong><a href="https://sites.google.com/site/clinpred/home">ClinPred Score.</a></strong> Se puede descargar un dataset con algunos Scores precalculados del siguiente <a href="https://drive.google.com/file/d/1Rh696VtfU4BBI33EltsW5BltOCDqc8Q4/view?usp=sharing">link.</a>
+                </li>
+            </ul>
+            <p>
+                Estos metapredictores utilizan <strong><a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html">Random Forest Regressor</a></strong> como modelo para la predicción de los valores que deberíamos
+                obtener.
+            </p>
+            <p>
+                Los metapredictores <strong>NO</strong> son los modelos originales; es decir: nos proporcionan un valor aproximado del valor que deberían tomar estos scores y que sirven para el modelo para obtener el resultado final.
+            </p>
+            <p>
+                Una vez calculados estas puntuaciones para cada uno de los inputs, se utilizan en la entrada del modelo de clasificación, que utiliza un <strong><a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">Random Forest Classifier</a></strong>                como modelo de inteligencia artificial.
+            </p>
+            <div class="image" style="margin:50px;">
+                <img src="{{ url_for('static',filename='imgs/randomforest.gif') }}" class="rounded mx-auto d-block" alt="random forest classifier gif" style="width: 30%;">
+                <p style="text-align: center; font-size: 15px;">Random forest gif, de <a href="https://github.com/ryanholbrook/decision-boundaries-animations">Ryan Holbrook</a></p>
+            </div>
+            <p>Finalmente, se completa la información mostrada con una llamada a la siguiente
+                <strong><a href="https://rest.ensembl.org/documentation/info/vep_region_get">API de VEP</a></strong> para mostrar más información útil sobre las búsquedas realizadas.
+            </p>
+            <hr>
+            <div class="card bg-light  d-none d-sm-block d-md-block">
+                <div class="card-header">
+                    <h3 style="text-align: center;">Descargas</h3>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Enlaces para descargar los modelos. Se descargarán archivos .ZIP, en las cuáles se incluye el modelo, en formato <i>joblib</i> para importar desde Python, así como la información necesaria para poder hacer uso de ellos.
+                    </p>
+                    <table class="table table-bordered">
+                        <thead class="table-active bg-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Link de Descarga</th>
+                                <th scope="col">Hash SHA256 del archivo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="bg-light">1</th>
+                                <td>
+                                    <a href='/download_model/1'><button type="button" class="btn bg-light js-tooltip" data-toggle="tooltip" title="Descargar modelo.">Modelo de BayesDel_addAF score
+                                    </button></a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn bg-light btn-copy js-tooltip js-copy" id="copy_btn" data-toggle="tooltip" title="copiar al portapapeles" data-placement="bottom" data-copy="1BEFE712949F0F6B655D9E5D42F85B21D9F5BA29DB7D808CE847F2FC10AC0B21">                    
+                                        <p>1BEFE712949F0F6B655D9E5D42F85B21D9F5BA29DB7D808CE847F2FC10AC0B21</p>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light">2</th>
+                                <td>
+                                    <a href='/download_model/2'><button type="button" class="btn bg-light js-tooltip " data-toggle="tooltip" title="Descargar modelo.">Modelo de BayesDel_noAF score
+                                    </button></a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn bg-light btn-copy js-tooltip js-copy" id="copy_btn" data-toggle="tooltip" title="copiar al portapapeles" data-placement="bottom" data-copy="BA6B286FF26B12AB930E8D3104110E1464BD7C0A5A797AFBCA604EFA1A64041B">                    
+                                        <p>BA6B286FF26B12AB930E8D3104110E1464BD7C0A5A797AFBCA604EFA1A64041B</p>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light">3</th>
+                                <td>
+                                    <a href='/download_model/3'><button type="button" class="btn bg-light js-tooltip" data-toggle="tooltip" title="Descargar modelo.">Modelo de ClinPred score
+                                    </button></a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn text-dark bg-light btn-copy js-tooltip js-copy" id="copy_btn" data-toggle="tooltip" title="copiar al portapapeles" data-placement="bottom" data-copy="BA6B286FF26B12AB930E8D3104110E1464BD7C0A5A797AFBCA604EFA1A64041B">                    
+                                        <p>BA6B286FF26B12AB930E8D3104110E1464BD7C0A5A797AFBCA604EFA1A64041B</p>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light">4</th>
+                                <td>
+                                    <a href='/download_model/4'><button type="button" class="btn bg-light js-tooltip " data-toggle="tooltip" title="Descargar modelo.">Modelo de SNP Tool
+                                    </button></a>
+
+                                </td>
+                                <td>
+                                    <button type="button" class="btn bg-light btn-copy js-tooltip js-copy" id="copy_btn" data-toggle="tooltip" title="copiar al portapapeles" data-placement="bottom" data-copy="BE9975EF4D9C5505D3B59601C9C4C8E0B2612F8B71E8B3B3DAF23EF2F5EFFF9B">                    
+                                        <p>BE9975EF4D9C5505D3B59601C9C4C8E0B2612F8B71E8B3B3DAF23EF2F5EFFF9B</p>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block script %}
+<script>
+    function copyToClipboard(text, el) {
+        var copyTest = document.queryCommandSupported('copy');
+        var elOriginalText = el.attr('data-original-title');
+
+        if (copyTest === true) {
+            var copyTextArea = document.createElement("textarea");
+            copyTextArea.value = text;
+            document.body.appendChild(copyTextArea);
+            copyTextArea.select();
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'Copiado!' : 'Whoops, no ha podido ser!';
+                el.attr('data-original-title', msg).tooltip('show');
+            } catch (err) {
+                console.log('Whoops, no ha podido ser!');
+            }
+            document.body.removeChild(copyTextArea);
+            el.attr('data-original-title', elOriginalText);
+        } else {
+            window.prompt("Copiar al portapapeles: Ctrl+C o Command+C, Enter", text);
+        }
+    }
+
+    $(document).ready(function() {
+        $('.js-tooltip').tooltip();
+        $('.js-copy').click(function() {
+            var text = $(this).attr('data-copy');
+            var el = $(this);
+            copyToClipboard(text, el);
+        });
+    });
+</script>
+{% endblock %}

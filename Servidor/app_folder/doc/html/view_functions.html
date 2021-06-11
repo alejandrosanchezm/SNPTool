@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>view_functions module &mdash; documentación de SNP Tool - 1.0</title>
+
+
+
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+
+
+
+
+
+
+
+
+
+    <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+
+
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="prev" title="tasks module" href="tasks.html" />
+</head>
+
+<body class="wy-body-for-nav">
+
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-scroll">
+                <div class="wy-side-nav-search">
+
+
+
+                    <a href="index.html" class="icon icon-home"> SNP Tool
+          
+
+          
+          </a>
+
+
+
+
+
+
+
+                    <div role="search">
+                        <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+                            <input type="text" name="q" placeholder="Buscar documentos" />
+                            <input type="hidden" name="check_keywords" value="yes" />
+                            <input type="hidden" name="area" value="default" />
+                        </form>
+                    </div>
+
+
+                </div>
+
+
+                <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+
+
+
+                    <p class="caption"><span class="caption-text">Contenidos:</span></p>
+                    <ul class="current">
+                        <li class="toctree-l1 current"><a class="reference internal" href="modules.html">app_folder</a>
+                            <ul class="current">
+                                <li class="toctree-l2"><a class="reference internal" href="app.html">app package</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="config.html">config module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="data_structs.html">data_structs module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="init_functions.html">init_functions module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="messages.html">messages module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="run_app.html">run_app module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="task_functions.html">task_functions module</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="tasks.html">tasks module</a></li>
+                                <li class="toctree-l2 current"><a class="current reference internal" href="#">view_functions module</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
+
+                </div>
+
+            </div>
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+            <nav class="wy-nav-top" aria-label="top navigation">
+
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="index.html">SNP Tool</a>
+
+            </nav>
+
+
+            <div class="wy-nav-content">
+
+                <div class="rst-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div role="navigation" aria-label="breadcrumbs navigation">
+
+                        <ul class="wy-breadcrumbs">
+
+                            <li>
+                                <a href="index.html" class="icon icon-home"></a> &raquo;</li>
+
+                            <li><a href="modules.html">app_folder</a> &raquo;</li>
+
+                            <li>view_functions module</li>
+
+
+                            <li class="wy-breadcrumbs-aside">
+
+
+                                <a href="_sources/view_functions.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+
+
+                            </li>
+
+                        </ul>
+
+
+                        <hr/>
+                    </div>
+                    <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+                        <div itemprop="articleBody">
+
+                            <div class="section" id="module-view_functions">
+                                <span id="view-functions-module"></span>
+                                <h1>view_functions module<a class="headerlink" href="#module-view_functions" title="Enlazar permanentemente con este título">¶</a></h1>
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.allowed_file">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">allowed_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.allowed_file" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Indica si un fichero es de un formato permitido. Devuelve True si es de un formato permitido, False en caso contrario.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <p><strong>filename</strong> (<em>String .</em>) – Nombre del fichero a comprobar (Ej. datos.csv).</p>
+                                            </dd>
+                                            <dt class="field-even">Devuelve</dt>
+                                            <dd class="field-even">
+                                                <p>Extensión del archivo en caso de éxito, False en caso contrario.</p>
+                                            </dd>
+                                            <dt class="field-odd">Tipo del valor devuelto</dt>
+                                            <dd class="field-odd">
+                                                <p>String en caso de éxito, Boolean en caso contrario.</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.allowed_filesize">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">allowed_filesize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.allowed_filesize" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Indica si un fichero tiene un tamaño menor o igual al tamaño máximo permitido. Devuelve True si el tamaño está permitido, False en caso contrario.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <p><strong>filesize</strong> (<em>String.</em>) – Tamaño del fichero.</p>
+                                            </dd>
+                                            <dt class="field-even">Devuelve</dt>
+                                            <dd class="field-even">
+                                                <p>True en caso de que esté permitido el tamaño, False en caso contrario.</p>
+                                            </dd>
+                                            <dt class="field-odd">Tipo del valor devuelto</dt>
+                                            <dd class="field-odd">
+                                                <p>Boolean.</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.cast_register_to_text">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">cast_register_to_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.cast_register_to_text" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Sirve para convertir el diccionario de errores en una cadena de texto.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <p><strong>register</strong> (<em>Dictionary.</em>) – Diccionario con los errores de una petición.</p>
+                                            </dd>
+                                            <dt class="field-even">Devuelve</dt>
+                                            <dd class="field-even">
+                                                <p>String del diccionario; None en caso de error.</p>
+                                            </dd>
+                                            <dt class="field-odd">Tipo del valor devuelto</dt>
+                                            <dd class="field-odd">
+                                                <p>String en caso de éxito; None en caso contrario.</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.create_OHE">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">create_OHE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.create_OHE" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Codifica los Cromosomas y los Alelos en OHE.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <p><strong>df</strong> (<em>Pandas DataFrame.</em>) – Pandas DataFrame con los datos de la petición.</p>
+                                            </dd>
+                                            <dt class="field-even">Devuelve</dt>
+                                            <dd class="field-even">
+                                                <p>Pandas DataFrame con los datos transformados.</p>
+                                            </dd>
+                                            <dt class="field-odd">Tipo del valor devuelto</dt>
+                                            <dd class="field-odd">
+                                                <p>Pandas DataFrame.</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.get_time_stamp">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">get_time_stamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.get_time_stamp" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Devuelve un string con la fecha y la hora de llamada de la función en formato «%d/%m/%Y %H:%M:%S».</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Devuelve</dt>
+                                            <dd class="field-odd">
+                                                <p>String con el formato indicado.</p>
+                                            </dd>
+                                            <dt class="field-even">Tipo del valor devuelto</dt>
+                                            <dd class="field-even">
+                                                <p>String.</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.is_valid_format_v2">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">is_valid_format_v2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.is_valid_format_v2" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Indica si unos datos o un fichero tienen un formato correcto. En caso de ser correcto, devuelve un Pandas Dataframe con los datos formateados corrrectamente y preprocesados (es decir, transformadas aquellas variables
+                                            que lo requieran); devolverá False en caso contrario.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <ul class="simple">
+                                                    <li>
+                                                        <p><strong>data</strong> (<em>String.</em>) – Cadena que contiene los datos a procesar. Proviene del formulario de entrada, o de la API.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>filename</strong> (<em>String</em><em> (</em><em>Path del fichero</em><em>)</em><em></em>) – Nombre del fichero a revisar.</p>
+                                                    </li>
+                                                </ul>
+                                            </dd>
+                                            <dt class="field-even">Devuelve</dt>
+                                            <dd class="field-even">
+                                                <p>Devuelve un diccionario con los siguientes campos: -“resultado”:diccionario con los datos formateados. -“registro”:diccionario con las líneas erróneas y el error encontrado. -“duplicados”:booleano que indica
+                                                    True si contiene líneas duplicadas, False en caso contrario.</p>
+                                            </dd>
+                                        </dl>
+                                        <p>En caso de error, devolverá None. :rtype: Dictionary en caso de éxito, None en caso de error.</p>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.prepare_index_args">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">prepare_index_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.prepare_index_args" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Prepara los argumentos para la página de inicio.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <p><strong>uid</strong> (<em>String</em><em> (</em><em>UID</em><em>)</em><em></em>) – UID de la cookie de sesión del usuario.</p>
+                                            </dd>
+                                            <dt class="field-even">Devuelve</dt>
+                                            <dd class="field-even">
+                                                <p>Diccionario con los datos necesarios para mostrar la página de inicio.</p>
+                                            </dd>
+                                            <dt class="field-odd">Tipo del valor devuelto</dt>
+                                            <dd class="field-odd">
+                                                <p>Dictionary.</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.prepare_result_args">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">prepare_result_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">answer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.prepare_result_args" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Prepara los argumentos para la página de resultados</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <ul class="simple">
+                                                    <li>
+                                                        <p><strong>answer</strong> (<em>Dictionary</em>) – Datos desde la base de datos</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>copy_data</strong> (<em>Dictionary</em>) – Datos de los resultados de la predicción (desde la cola)</p>
+                                                    </li>
+                                                </ul>
+                                            </dd>
+                                            <dt class="field-even">Devuelve</dt>
+                                            <dd class="field-even">
+                                                <p>Diccionario con los datos necesarios para mostrar la página de resultados</p>
+                                            </dd>
+                                            <dt class="field-odd">Tipo del valor devuelto</dt>
+                                            <dd class="field-odd">
+                                                <p>Dictionary</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.read_vcf_file">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">read_vcf_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.read_vcf_file" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Función que se encarga de leer los ficheros de tipo vcf.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <p><strong>filename</strong> (<em>String</em><em> (</em><em>Path del fichero</em><em>)</em><em></em>) – Nombre del fichero a leer.</p>
+                                            </dd>
+                                            <dt class="field-even">Devuelve</dt>
+                                            <dd class="field-even">
+                                                <p>Pandas DataFrame con los datos formateados, None en caso de error.</p>
+                                            </dd>
+                                            <dt class="field-odd">Tipo del valor devuelto</dt>
+                                            <dd class="field-odd">
+                                                <p>Pandas DataFrame en caso de éxito, None en caso de error.</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.return_dict_as_table">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">return_dict_as_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.return_dict_as_table" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Esta función se encarga de transformar los datos de la línea de Transcript records a un formato de tabla de tal forma que pueda ser mostrado en la página de resultados de una manera más legible.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <p><strong>input_data</strong> (<em>List.</em>) – Lista con los datos de transcript_consequeces de una predicción.</p>
+                                            </dd>
+                                            <dt class="field-even">Devuelve</dt>
+                                            <dd class="field-even">
+                                                <p>Diccionario con los resultados en forma de tabla; en caso de error o no haber datos se devolverá “Sin datos”.</p>
+                                            </dd>
+                                            <dt class="field-odd">Tipo del valor devuelto</dt>
+                                            <dd class="field-odd">
+                                                <p>Dictionary en caso de éxito, o String en caso contrario.</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.return_one_day_expire">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">return_one_day_expire</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.return_one_day_expire" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Devuelve la fecha del día siguiente al que se ejecuta.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Devuelve</dt>
+                                            <dd class="field-odd">
+                                                <p>DateTime que marca el día siguiente.</p>
+                                            </dd>
+                                            <dt class="field-even">Tipo del valor devuelto</dt>
+                                            <dd class="field-even">
+                                                <p>Datetime.</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.save_as_csv">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">save_as_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.save_as_csv" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Guarda un fichero como .CSV en la carpeta static/client/.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <ul class="simple">
+                                                    <li>
+                                                        <p><strong>data</strong> (<em>Diccionario</em><em> (</em><em>Formato de respuesta de la función tasks.py/request_task</em><em>)</em><em></em>) – Resultados de la petición de predicción.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>job_id</strong> (<em>String</em><em> (</em><em>UID de la petición</em><em>)</em><em></em>) – Identificador de la petición (Se obtiene al añadir la tarea a la cola.).</p>
+                                                    </li>
+                                                </ul>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.save_task_on_db">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">save_task_on_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registro</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duplicados</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.save_task_on_db" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Guarda una tarea en la base de datos.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <ul class="simple">
+                                                    <li>
+                                                        <p><strong>job_id</strong> (<em>String</em><em> (</em><em>UID de la petición</em><em>)</em><em></em>) – Identificador de la petición (Se obtiene al añadir la tarea a la cola.).</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>title</strong> (<em>String .</em>) – Título de la petición.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>timestamp</strong> (<em>String.</em>) – TimeStamp de la fecha y hora de la creación de la tarea.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>uid</strong> (<em>String</em><em> (</em><em>UID</em><em>)</em><em></em>) – UID de la cookie del usuario.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>registro</strong> (<em>String.</em>) – Registro de todas las líneas con algún error de codificación.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>duplicados</strong> (<em>Booleano</em><em> (</em><em>True</em><em>, </em><em>False</em><em>)</em><em></em>) – Indica si la petición contenía o no líneas duplicadas.</p>
+                                                    </li>
+                                                </ul>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.search_if_in_range">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">search_if_in_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chromosome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.search_if_in_range" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Busca si una posición de un cromosoma está o no permitida por la aplicación.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <ul class="simple">
+                                                    <li>
+                                                        <p><strong>chromosome</strong> (<em>String</em><em> [</em><em>1..22</em><em>, </em><em>X</em><em>]</em><em></em>) – Cromosoma.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>position</strong> (<em>Integer</em><em> (</em><em>Positivo</em><em>)</em><em></em>) – Posición en el cromosoma.</p>
+                                                    </li>
+                                                </ul>
+                                            </dd>
+                                            <dt class="field-even">Devuelve</dt>
+                                            <dd class="field-even">
+                                                <p>Devuelve True si está en el rango permitido, False en caso contrario.</p>
+                                            </dd>
+                                            <dt class="field-odd">Tipo del valor devuelto</dt>
+                                            <dd class="field-odd">
+                                                <p>Boolean (True o False)</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.update_jobs">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">update_jobs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.update_jobs" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Incrementa uno a la variable global y la variable de la base de datos del número de trabajos.</p>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.update_visits">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">update_visits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.update_visits" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Incrementa uno a la variable global y la variable de la base de datos del número de visitas.</p>
+                                    </dd>
+                                </dl>
+
+                                <dl class="py function">
+                                    <dt class="sig sig-object py" id="view_functions.write_on_notification_log">
+<span class="sig-prename descclassname"><span class="pre">view_functions.</span></span><span class="sig-name descname"><span class="pre">write_on_notification_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#view_functions.write_on_notification_log" title="Enlazar permanentemente con esta definición">¶</a></dt>
+                                    <dd>
+                                        <p>Escribe los mensajes de notificación de errores en el fichero de log.</p>
+                                        <dl class="field-list simple">
+                                            <dt class="field-odd">Parámetros</dt>
+                                            <dd class="field-odd">
+                                                <p><strong>data</strong> (<em>Dictionary.</em>) – Diccionario con los campos de la notificación del error.</p>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <footer>
+                        <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+                            <a href="tasks.html" class="btn btn-neutral float-left" title="tasks module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+                        </div>
+
+                        <hr/>
+
+                        <div role="contentinfo">
+                            <p>
+                                &#169; Derechos de autor 2021, Alejandro Sánchez Marcos.
+
+                            </p>
+                        </div>
+
+
+
+                        Construido con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+
+                        <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a> proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+
+                    </footer>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script type="text/javascript">
+        jQuery(function() {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>

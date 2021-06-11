@@ -1,0 +1,136 @@
+{% extends "public/templates/public_template.html" %} {% block title %} SNP TOOL - API {% endblock %} {% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Documentación de la API</h2>
+            <hr>
+            <div class="section" id="resourceful-routing">
+                <div id="accordion">
+                    <div class="card bg-light">
+                        <div class="card-header" id="heading">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <div>
+                                    <h5><span class="badge badge-danger"> POST </span> request</h5>
+                                </div>
+                            </button>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse" data-toggle="true" aria-labelledby="heading" data-parent="#accordion">
+
+                            <div class="card-body">
+                                <strong><p>Ruta para realizar la petición: ''/api/request''</p></strong>
+                                <hr>
+                                <p>
+                                    <strong>Argumentos de entrada</strong>
+                                    <ul class="list-group">
+                                        <li class="list-group-item list-group-item-white bg-white">
+                                            <p><strong>data:</strong> una lista de cadenas con los datos separados por comas.</p>
+                                        </li>
+                                    </ul>
+                                </p>
+                                <p>
+                                    <strong>Respuesta</strong>
+                                    <p>Datos en formato JSON con tantos diccionarios como peticiones se hayan hecho. Los datos de la respuesta son los siguientes:</p>
+                                    <ul class="list-group">
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>job_id:</strong> Identificador con el que se ha guardado la consulta.</li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>hg19_chr:</strong> cromosoma (del 1 al 22, o el cromosoma X). </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>hg19_pos:</strong> posición en el cromosoma en notación hg19(1-based). </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>ref:</strong> base de referencia del SNP.</li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>alt:</strong> base alternante del SNP.</li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>aaref:</strong> aminoácido de referencia del SNP. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>aaalt:</strong> aminoácido alternante del SNP. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>BayesDel_addAF_score:</strong> meta-predicción del BayesDel_addAF_score. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>BayesDel_noAF_score:</strong> meta-predicción del BayesDel_noAF_score. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>ClinPred_Score:</strong> meta-predicción del ClinPred Score. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>prediction:</strong> predicción del clasificador (Benigno o Patógeno). </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>most_severe_consequence:</strong> consecuencia más severa del SNP. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>transcript_consequences:</strong> posibles consecuencias del SNP. </li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section" id="resourceful-routing">
+                <div id="accordionTwo">
+                    <div class="card bg-light">
+                        <div class="card-header" id="heading">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <div>
+                                    <h5><span class="badge badge-success"> GET </span> request job result</h5>
+                                </div>
+                            </button>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse" data-toggle="true" aria-labelledby="heading" data-parent="#accordionTwo">
+                            <div class="card-body">
+                                <strong><p>Ruta para realizar la petición: ''/api/request_job_result''</p></strong>
+                                <hr>
+                                <p>
+                                    <strong>Argumentos de entrada</strong>
+                                    <ul class="list-group">
+                                        <li class="list-group-item list-group-item-white bg-white">
+                                            <p><strong>job_id:</strong> identificador de un trabajo ya existente.</p>
+                                        </li>
+                                    </ul>
+                                </p>
+                                <p>
+                                    <strong>Respuesta</strong>
+                                    <p>Datos en formato JSON con tantos diccionarios como peticiones se hayan hecho. Los datos de la respuesta son los siguientes:</p>
+                                    <ul class="list-group">
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>job_id:</strong> Identificador con el que se ha guardado la consulta.</li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>hg19_chr:</strong> cromosoma (del 1 al 22, o el cromosoma X). </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>hg19_pos:</strong> posición en el cromosoma en notación hg19(1-based). </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>ref:</strong> base de referencia del SNP.</li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>alt:</strong> base alternante del SNP.</li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>aaref:</strong> aminoácido de referencia del SNP. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>aaalt:</strong> aminoácido alternante del SNP. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>BayesDel_addAF_score:</strong> meta-predicción del BayesDel_addAF_score. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>BayesDel_noAF_score:</strong> meta-predicción del BayesDel_noAF_score. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>ClinPred_Score:</strong> meta-predicción del ClinPred Score. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>prediction:</strong> predicción del clasificador (Benigno o Patógeno). </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>most_severe_consequence:</strong> consecuencia más severa del SNP. </li>
+                                        <li class="list-group-item list-group-item-white bg-white"> <strong>transcript_consequences:</strong> posibles consecuencias del SNP. </li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h2>Llamadas a la API
+                <a class="headerlink" href="#resourceful-routing" title="Permalink to this headline"></a>
+            </h2>
+            <hr>
+            <p>Existen diferentes formas de hacer una llamada a una API REST.</p>
+            <p>Por ejemplo, puedes usarlo mediante el comando <a class="reference external" href="https://curl.se/">Curl</a>...</p>
+
+            <div class="container code bg-light">
+                <div class="highlight-console notranslate">
+                    <div class="highlight"><pre><span></span>
+<span class="gp">$</span><span class="bg-light">curl http://SNPTool.es/api/request -d </span><span class="bg-light">"data=1,955563,G,C,R,P"</span><span class="bg-light"> -X POST</span>
+<span class="bg-light">{...,'prediction': 'Benigno'}</span>
+</pre></div>
+                </div>
+            </div>
+
+            <p>..o mediante Python con la librería <a class="reference external" href="http://docs.python-requests.org/">Requests</a>:</p>
+
+            <div class="container code bg-light">
+                <div class="highlight-python notranslate">
+                    <div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="bg-light">post</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bg-light">post(</span><span class="s1">'http://SNPTool.es/api/request'</span><span class="bg-light">,params={</span><span class="s1">'data'</span><span class="bg-light">:</span> <span class="s1">'1,955563,G,C,R,P'</span><span class="bg-light">,...})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="bg-light">{...,'prediction': 'Benigno'}</span>
+</pre></div>
+                </div>
+            </div>
+
+            <p> tomando los argumentos que se indiquen para cada llamada a la API.</p>
+            <hr>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
