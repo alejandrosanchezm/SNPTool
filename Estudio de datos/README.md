@@ -1,4 +1,4 @@
-# TFG
+# SNPTool
 
   Estudio de datos para la creación de una herramienta para la predicción de la patogenidad de los Polimofirmos de Nucleótido Único.
   
