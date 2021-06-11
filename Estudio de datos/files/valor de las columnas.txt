@@ -1,0 +1,190 @@
+Las columnas que tenemos actualmente son las siguientes:
+
+- 0	chr: chromosome number
+- 1	pos(1-based): physical position on the chromosome as to hg38 (1-based coordinate). For mitochondrial SNV, this position 
+    refers to the rCRS (GenBank: NC_012920). 
+- 2	ref: reference nucleotide allele (as on the + strand)
+- 3	alt: alternative nucleotide allele (as on the + strand)
+- 4	aaref: reference amino acid "." if the variant is a splicing site SNP (2bp on each end of an intron)
+- 5	aaalt: alternative amino acid "." if the variant is a splicing site SNP (2bp on each end of an intron)
+- 6	hg19_chr: chromosome as to hg19, "." means missing
+- 7	hg19_pos(1-based): physical position on the chromosome as to hg19 (1-based coordinate).
+- 8	aapos: amino acid position as to the protein. "-1" if the variant is a splicing site SNP (2bp on each end of an intron). 
+    Multiple entries separated by ";", corresponding to Ensembl_proteinid
+- 9 SIFT_score: SIFT score (SIFTori). Scores range from 0 to 1. The smaller the score themore likely the SNP has damaging 
+    effect. Multiple scores separated by ";", corresponding to Ensembl_proteinid.
+- 10 SIFT4G_score: SIFT 4G score (SIFT4G). Scores range from 0 to 1. The smaller the score themore likely the SNP has   damaging 
+  effect. Multiple scores separated by ",", corresponding to Ensembl_transcriptid        
+- 11 Polyphen2_HDIV_score: Polyphen2 score based on HumDiv, i.e. hdiv_prob. The score ranges from 0 to 1, and the 
+  corresponding prediction is "probably damaging" if it is in [0.957,1]; "possibly damaging" if it is in [0.453,0.956];  
+  "benign" if it is in [0,0.452]. Score cutoff for binary classification is 0.5, i.e. the prediction is "neutral" if the score 
+  is smaller than 0.5 and "deleterious" if the score is larger than 0.5. Multiple entries separated by ";".
+- 12 Polyphen2_HVAR_score: [0.909,1]; "possibly damaging" if it is in [0.447,0.908]; "benign" if it is in [0,0.446]. Score
+  cutoff for binary classification is 0.5, i.e. the prediction is "neutral" if the score is smaller than
+  0.5 and "deleterious" if the score is larger than 0.5.
+- 13 LRT_score: The original LRT two-sided p-value (LRTori), ranges from 0 to 1.
+- 14 LRT_Omega: estimated nonsynonymous-to-synonymous-rate ratio (Omega, reported by LRT)
+- 15 MutationTaster_score: MutationTaster p-value (MTori), ranges from 0 to 1. Multiple scores are separated by ";". Information 
+  on corresponding transcript(s) can be found by querying http://www.mutationtaster.org/ChrPos.html
+- 16 MutationAssessor_score: MutationAssessor functional impact combined score (MAori). The score ranges from -5.17 to 6.49 in 
+  dbNSFP.
+- 17 FATHMM_score: FATHMM default score (weighted for human inherited-disease mutations with Disease Ontology) (FATHMMori). 
+  Scores range from -16.13 to 10.64. The smaller the score the more likely the SNP has damaging effect. Multiple scores 
+  separated by ";", corresponding to Ensembl_proteinid.
+- 18 PROVEAN_score: PROVEAN score (PROVEANori). Scores range from -14 to 14. The smaller the score the more likely the SNP has 
+  damaging effect. Multiple scores separated by ";", corresponding to Ensembl_proteinid.
+- 19 VEST4_score: variante de VEST Score (Variant Effect Scoring Tool)
+- 20 MetaSVM_score: Our support vector machine (SVM) based ensemble prediction score, which incorporated 10 scores (SIFT, 
+  PolyPhen-2 HDIV, PolyPhen-2 HVAR, GERP++, MutationTaster, Mutation Assessor, FATHMM, LRT, SiPhy, PhyloP) and the maximum 
+  frequency observed in the 1000 genomes populations. Larger value means the SNV is more likely to be damaging. Scores range 
+  from -2 to 3 in dbNSFP.
+- 21 MetaLR_score: Our logistic regression (LR) based ensemble prediction score, which incorporated 10 scores (SIFT, PolyPhen-2 
+  HDIV, PolyPhen-2 HVAR, GERP++, MutationTaster, Mutation Assessor, FATHMM, LRT, SiPhy, PhyloP) and the maximum frequency 
+  observed in the 1000 genomes populations. Larger value means the SNV is more likely to be damaging. Scores range from 0 to 1.
+- 22 M-CAP_score: M-CAP is hybrid ensemble score (details in DOI: 10.1038/ng.3703). Scores range from 0 to 1. The larger the 
+  score the more likely the SNP has damaging effect.
+- 23 REVEL: An Ensemble Method for Predicting the Pathogenicity of Rare Missense Variants
+- 24 MutPred_score: General MutPred score. Scores range from 0 to 1. The larger the score the more likely the SNP has damaging 
+  effect.
+- 25 MVP_score: A pathogenicity prediction score for missense variants using deep learning approach. The range of MVP score is 
+  from 0 to 1. The larger the score, the more likely the variant is mpathogenic. The authors suggest thresholds of 0.7 and 0.75 
+  for separating damaging vs tolerant variants in constrained genes (ExAC pLI >=0.5) and non-constrained genes (ExAC pLI<0.5), 
+  respectively. Details see doi: http://dx.doi.org/10.1101/259390. Multiple entries are separated by ";", corresponding to 
+  Ensembl_transcriptid.
+- 26 MPC_score: A deleteriousness prediction score for missense variants based on regional missense constraint. The range of MPC 
+  score is 0 to 5. The larger the score, the more likely the variant is pathogenic. Details see doi: 
+  http://dx.doi.org/10.1101/148353. Multiple entries are separated by ";", corresponding to Ensembl_transcriptid.
+- 27 PrimateAI_score: A pathogenicity prediction score for missense variants based on common variants of non-human primate 
+  species using a deep neural network. The range of PrimateAI score is 0 to 1. The larger the score, the more likely the variant 
+  is pathogenic. The authors suggest a threshold of 0.803 for separating damaging vs tolerant variants. Details see 
+  https://doi.org/10.1038/s41588-018-0167-z
+- 28 DEOGEN2_score: A deleteriousness prediction score "which incorporates heterogeneous information about the molecular effects 
+  of the variants, the domains involved, the relevance of the gene and the interactions in which it participates". It ranges 
+  from 0 to 1. The larger the score, the more likely the variant is deleterious. The authors suggest a threshold of 0.5 for 
+  separating damaging vs tolerant variants.
+- 29 BayesDel_addAF_score: A deleteriousness preidction meta-score for SNVs and indels with inclusion of MaxAF. See 
+  https://doi.org/10.1002/humu.23158 for details. The range of the score in dbNSFP is from -1.11707 to 0.750927. The higher the 
+  score, the more likely the variant is pathogenic. The author suggested cutoff between deleterious ("D") and tolerated ("T") is 
+  0.0692655.
+- 30 BayesDel_noAF_score: A deleteriousness preidction meta-score for SNVs and indels without inclusion of MaxAF. See 
+  https://doi.org/10.1002/humu.23158 for details. The range of the score in dbNSFP is from -1.31914 to 0.840878. The higher the 
+  score, the more likely the variant is pathogenic. The author suggested cutoff between deleterious ("D") and tolerated ("T") is 
+  -0.0570105.
+- 31 ClinPred: Prediction Tool to Identify Disease-Relevant Nonsynonymous Single-Nucleotide Variants
+- 32 LIST-S2_score: A deleteriousness preidction score for nonsynonymous SNVs. See https://doi.org/10.1093/nar/gkaa288. for 
+  details. The range of the score in dbNSFP is from 0 to 1. The higher the score, the more likely the variant is pathogenic. The 
+  author suggested cutoff between deleterious ("D") and tolerated ("T") is 0.85.
+- 33 Aloft_prob_Tolerant: Probability of the SNP being classified as benign by ALoFT multiple values separated by ";", 
+  corresponding to Ensembl_proteinid.
+- 34 Aloft_prob_Recessive: Probability of the SNP being classified as recessive disease-causing by ALoFT multiple values 
+  separated by ";", corresponding to Ensembl_proteinid.
+- 35 Aloft_prob_Dominant:  Probability of the SNP being classified as dominant disease-causing by ALoFT multiple values 
+  separated by ";", corresponding to Ensembl_proteinid.
+- 36 CADD - Combined Annotation Dependent Depletion. "Raw" CADD scores come straight from the model, and are interpretable as the extent to which the annotation profile for a given variant suggests that the variant is likely to be "observed" (negative values) vs "simulated" (positive values). These values have no absolute unit of meaning and are incomparable across distinct annotation combinations, training sets, or model parameters. However, raw values do have relative meaning, with higher values indicating that a variant is more likely to be simulated (or "not observed") and therefore more likely to have deleterious effects.
+- 37 CADD - Combined Annotation Dependent Depletion.  "PHRED-scaled" those values by expressing the rank in order of magnitude terms rather than the precise rank itself. For example, reference genome single nucleotide variants at the 10th-% of CADD scores are assigned to CADD-10, top 1% to CADD-20, top 0.1% to CADD-30, etc. The results of this transformation are the "scaled" CADD scores.
+- 38 DANN_score: DANN is a functional prediction score retrained based on the training data of CADD using deep neural network. 
+  Scores range from 0 to 1. A larger number indicate a higher probability to be damaging. More information of this score can be 
+  found in doi: 10.1093/bioinformatics/btu703.
+- 39 fathmm-MKL_coding_score: fathmm-MKL p-values. Scores range from 0 to 1. SNVs with scores >0.5 are predicted to be 
+  deleterious, and those <0.5 are predicted to be neutral or benign. Scores close to 0 or 1 are with the highest-confidence. 
+  Coding scores are trained using 10 groups of features. More details of the score can be found in doi: 
+  10.1093/bioinformatics/btv009.
+- 40 fathmm-XF_coding_score: fathmm-XF p-values. Scores range from 0 to 1. SNVs with scores >0.5 are predicted to be 
+  deleterious, and those <0.5 are predicted to be neutral or benign. Scores close to 0 or 1 are with the highest-confidence. 
+  Coding scores are trained using 10 groups of features. More details of the score can be found in doi: 
+  10.1093/bioinformatics/btx536.
+- 41 Eigen-raw_coding: Eigen score for coding SNVs. A functional prediction score based on conservation, allele frequencies, and 
+  deleteriousness prediction using an unsupervised learning method (doi: 10.1038/ng.3477).
+- 42 Eigen-phred_coding: Eigen score in phred scale.
+- 43 Eigen-PC-raw_coding: Eigen PC score for genome-wide SNVs. A functional prediction score based on conservation, allele 
+  frequencies, deleteriousness prediction (for missense SNVs) and epigenomic signals (for synonymous and non-coding SNVs) using 
+  an unsupervised learning method (doi: 10.1038/ng.3477).
+- 44 Eigen-PC-phred_coding: Eigen PC score in phred scale.
+- 45 GenoCanyon is a whole-genome functional annotation approach based on unsupervised statistical learning. It integrates genomic conservation measures and biochemical annotation data to predict the functional potential at each nucleotide.
+- 46 integrated_fitCons_score: fitCons score predicts the fraction of genomic positions belonging to a specific function class 
+  (defined by epigenomic "fingerprint") that are under selective pressure. Scores range from 0 to 1, with a larger score 
+  indicating a higher proportion of nucleic sites of the functional class the genomic position belong to are under selective 
+  pressure, therefore more likely to be functional important. Integrated (i6) scores are integrated across three cell types 
+  (GM12878, H1-hESC and HUVEC). More details can be found in doi:10.1038/ng.3196.
+- 47 GM12878_fitCons_score: fitCons score predicts the fraction of genomic positions belonging to a specific function class 
+  (defined by epigenomic "fingerprint") that are under selective pressure. Scores range from 0 to 1, with a larger score 
+  indicating a higher proportion of nucleic sites of the functional class the genomic position belong to are under selective 
+  pressure, therefore more likely to be functional important. GM12878 fitCons scores are based on cell type GM12878. More 
+  details can be found in doi:10.1038/ng.3196.
+- 48 H1-hESC_fitCons_score: fitCons score predicts the fraction of genomic positions belonging to a specific function class 
+  (defined by epigenomic "fingerprint") that are under selective pressure. Scores range from 0 to 1, with a larger score 
+  indicating a higher proportion of nucleic sites of the functional class the genomic position belong to are under selective 
+  pressure, therefore more likely to be functional important. GM12878 fitCons scores are based on cell type H1-hESC. More 
+  details can be found in doi:10.1038/ng.3196.
+- 49 HUVEC_fitCons_score: fitCons score predicts the fraction of genomic positions belonging to a specific function class 
+  (defined by epigenomic "fingerprint") that are under selective pressure. Scores range from 0 to 1, with a larger score 
+  indicating a higher proportion of nucleic sites of the functional class the genomic position belong to are under selective  
+  pressure, therefore more likely to be functional important. GM12878 fitCons scores are based on cell type HUVEC. More details 
+  can be found in doi:10.1038/ng.3196.
+- 50 ??
+- 51 GERP++_RS: GERP++ RS score, the larger the score, the more conserved the site. Scores range from -12.3 to 6.17.
+- 52 phyloP100way_vertebrate: phyloP (phylogenetic p-values) conservation score based on the multiple alignments of 100 
+  vertebrate genomes (including human). The larger the score, the more conserved the site. Scores range from -20.0 to 10.003 in   dbNSFP.
+- 53 phyloP30way_mammalian: phyloP (phylogenetic p-values) conservation score based on the multiple alignments of 30 mammalian 
+  genomes (including human). The larger the score, the more conserved the site. Scores range from -20 to 1.312 in dbNSFP.
+- 54 phyloP17way_primate: a conservation score based on 17way alignment primate set, the higher the more conservative. Scores 
+  range from -13.362 to 0.756 in dbNSFP.
+- 55 phastCons100way_vertebrate: phastCons conservation score based on the multiple alignments of 100 vertebrate genomes 
+  (including human). The larger the score, the more conserved the site. Scores range from 0 to 1.  
+- 56 phastCons30way_mammalian: phastCons conservation score based on the multiple alignments of 30 mammalian genomes (including 
+  human). The larger the score, the more conserved the site. Scores range from 0 to 1.
+- 57 phastCons17way_primate: a conservation score based on 17way alignment primate set, The larger the score, the more conserved 
+  the site. Scores range from 0 to 1.  
+- 58 SiPhy_29way_logOdds: SiPhy score based on 29 mammals genomes. The larger the score, the more conserved the site. Scores 
+  range from 0 to 37.9718 in dbNSFP.
+- 59 bStatistic: Background selection (B) value estimates from doi.org/10.1371/journal.pgen.1000471. Ranges from 0 to 1000. It 
+  estimates the expected fraction (*1000) of neutral diversity present at a site. Values close to 0 represent near complete 
+  removal of diversity as a result of background selection and values near 1000 indicating absent of background selection. Data 
+  from CADD v1.4.
+- 60 1000Gp3_AF: Alternative allele frequency in the whole 1000Gp3 data.
+- 61 1000Gp3_AFR_AF: Alternative allele frequency in the 1000Gp3 African descendent samples.
+- 62 1000Gp3_EUR_AF: Alternative allele frequency in the 1000Gp3 European descendent samples.
+- 63 1000Gp3_AMR_AF: Alternative allele frequency in the 1000Gp3 American descendent samples.
+- 64 1000Gp3_EAS_AF: Alternative allele frequency in the 1000Gp3 East Asian descendent samples.
+- 65 1000Gp3_SAS_AF: Alternative allele frequency in the 1000Gp3 South Asian descendent samples.
+- 66 TWINSUK_AF: Alternative allele frequency in called genotypes in UK10K TWINSUK cohort.
+- 67 ALSPAC_AF: Alternative allele frequency in called genotypes in UK10K ALSPAC cohort.
+- 68 UK10K_AF: Alternative allele frequency in combined genotypes in UK10K cohort (TWINSUK+ALSPAC).
+- 69..122 Allele frequency of other different type.
+- 123 Interactions(IntAct): The number of other genes this gene interacting with (from IntAct). Full information (gene name 
+  followed by Pubmed id in "[]") can be found in the ".complete" table.
+- 124 Interactions(BioGRID): The number of other genes this gene interacting with (from BioGRID) Full information (gene name 
+  followed by Pubmed id in "[]") can be found in the ".complete" table.
+- 125 Interactions(ConsensusPathDB): The number of other genes this gene interacting with (from ConsensusPathDB). Full 
+  information (gene name followed by interaction confidence in "[]") can be found in the ".complete" table.
+- 126 P(HI): Estimated probability of haploinsufficiency of the gene (from doi:10.1371/journal.pgen.1001154)
+- 127 HIPred_score: Estimated probability of haploinsufficiency of the gene (from doi:10.1093/bioinformatics/btx028)
+- 128 HIPred: HIPred prediction of haploinsufficiency of the gene. Y(es) or N(o). (from doi:10.1093/bioinformatics/btx028)
+- 129 GHIS: A score predicting the gene haploinsufficiency. The higher the score the more likely the gene is haploinsufficient. 
+  (from doi: 10.1093/nar/gkv474) 
+- 130 P(rec): Estimated probability that gene is a recessive disease gene (from DOI:10.1126/science.1215040) 
+- 131 GDI: gene damage index score, "a genome-wide, gene-level metric of the mutational damage that has accumulated in the 
+  general population" from doi: 10.1073/pnas.1518646112. The higher the score the less likely the gene is to be responsible for 
+  monogenic diseases.
+- 132 GDI-Phred: Phred-scaled GDI scores
+- 133 Gene damage prediction (all disease-causing genes): gene damage prediction (low/medium/high) by GDI for all diseases
+- 134 Gene damage prediction (all Mendelian disease-causing genes): gene damage prediction (low/medium/high) by GDI for all 
+  Mendelian diseases
+- 135 Gene damage prediction (Mendelian AD disease-causing genes): gene damage prediction (low/medium/high) by GDI for Mendelian 
+  autosomal dominant diseases
+- 136 Gene damage prediction (Mendelian AR disease-causing genes): gene damage prediction (low/medium/high) by GDI for Mendelian 
+  autosomal recessive diseases
+- 137 Gene damage prediction (all PID disease-causing genes): gene damage prediction (low/medium/high) by GDI for all primary 
+  immunodeficiency diseases
+- 138 Gene damage prediction (PID AD disease-causing genes): gene damage prediction (low/medium/high) by GDI for primary 
+  immunodeficiency autosomal dominant diseases
+- 139 Gene damage prediction (PID AR disease-causing genes): gene damage prediction (low/medium/high) by GDI for primary 
+  immunodeficiency autosomal recessive diseases
+- 140 Gene damage prediction (all cancer disease-causing genes): gene damage prediction (low/medium/high) by GDI for all cancer 
+  disease
+- 141 Gene damage prediction (cancer recessive disease-causing genes): gene damage prediction (low/medium/high) by GDI for 
+  cancer recessive disease
+- 142 Gene damage prediction (cancer dominant disease-causing genes): gene damage prediction (low/medium/high) by GDI for cancer 
+  dominant disease
+- 143 LoFtool_score: a percentile score for gene intolerance to functional change. The lower the score the higher gene 
+  intolerance to functional change. For details see doi: 10.1093/bioinformatics/btv602.

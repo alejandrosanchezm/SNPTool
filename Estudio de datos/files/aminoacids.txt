@@ -1,0 +1,20 @@
+Alanine	Ala	A	2-Aminopropanoic acid	CH3-CH(NH2)-COOH
+Arginine	Arg	R	2-Amino-5-guanidinopentanoic acid	H2N-C(=NH)-NH-[CH2]3-CH(NH2)-COOH
+Asparagine	Asnd	N d	2-Amino-3-carbamoylpropanoic acid	H2N-CO-CH2-CH(NH2)-COOH
+Aspartic acid	Aspd	D d	2-Aminobutanedioic acid	HOOC-CH2-CH(NH2)-COOH
+Cysteine	Cys	C	2-Amino-3-mercaptopropanoic acid	HS-CH2-CH(NH2)-COOH
+Glutamine	Glnd	Qd	2-Amino-4-carbamoylbutanoic acid	H2N-CO-[CH2]2-CH(NH2)-COOH
+Glutamic acid	Glud	E d	2-Aminopentanedioic acid	HOOC-[CH2]2-CH(NH2)-COOH
+Glycine	Gly	G	Aminoethanoic acid	CH2(NH2)-COOH
+Histidine	His	H	2-Amino-3-(1H-imidazol-4-yl)-propanoic acid	
+Isoleucine	Ile	I	2-Amino-3-methylpentanoic acide	C2H5-CH(CH3)-CH(NH2)-COOH
+Leucine	Leu	L	2-Amino-4-methylpentanoic acid	(CH3)2CH-CH2-CH(NH2)-COOH
+Lysine	Lys	K	2,6-Diaminohexanoic acid	H2N-[CH2]4-CH(NH2)-COOH
+Methionine	Met	M	2-Amino-4-(methylthio)butanoic acid	CH3-S-[CH2]2-CH(NH2)-COOH
+Phenylalanine	Phe	F	2-Amino-3-phenylpropanoic acid	C6H5-CH2-CH(NH2)-COOH
+Proline	Pro	P	Pyrrolidine-2-carboxylic acid	
+Serine	Ser	S	2-Amino-3-hydroxypropanoic acid	HO-CH2-CH(NH2)-COOH
+Threonine	Thr	T	2-Amino-3-hydroxybutanoic acid CH3-CH(OH)-CH(NH2)-COOH
+Tryptophan	Trp	W	2-Amino-3-(lH-indol-3-yl)-propanoic acid	
+Tyrosine	Tyr	Y	2-Amino-3-(4-hydroxyphenyl)-propanoic acid	
+Valine	Val	V	2-Amino-3-methylbutanoic acid	(CH3)2CH-CH(NH2)-COOH
