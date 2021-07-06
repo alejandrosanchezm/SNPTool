@@ -1,6 +1,6 @@
 # SNPTool
 Herramienta para la predicción de la patogenicidad de los Polimorfismos de Nucleótido Único.
-La herramienta se encuentra accesible a través del link ![snptool.es]https://37.35.239.182:5000/
+La herramienta se encuentra accesible a través del link https://snptool.es
 
 Este repositorio se divide en dos partes:
 
@@ -8,17 +8,27 @@ Este repositorio se divide en dos partes:
 - Servidor: contiene la aplicación Flask desarrollada para el modelo
 
 
-![alt text](https://raw.githubusercontent.com/alejandrosanchezm/SNPTool/main/Servidor/app_folder/app/static/imgs/Titulo.png)
+  ![alt text](https://raw.githubusercontent.com/alejandrosanchezm/SNPTool/main/Servidor/app_folder/app/static/imgs/Titulo.png)
 
 ----------------------------------------------------------------------------------------------
 
 Esta herramienta ha sido desarrollada como Trabajo de Fin de Grado de la carrera de Ingeniería Informática.
 
+La memoria y los anexos del proyecto se encuentran disponibles en el siguiente enlace:
+https://drive.google.com/file/d/1jBocoyfg7WcYlUOZzGUcHdV8T6iH8vEr/view?usp=sharing
+
 ----------------------------------------------------------------------------------------------
 
+Modelo desarrollado con 🤖
+ - Jupyter notebooks
+ 
 Construido con 🛠️
-Python - Lenguaje de programación
-Flask - Flask es un framework minimalista escrito en Python que permite crear aplicaciones web
-Bootstrap - Usado en el diseño de la página
+ - Python
+ - Flask
+ - Bootstrap
+ - Celery
+ - Redis
+ - MongoDB
+ - SkLearn
 
 ----------------------------------------------------------------------------------------------
