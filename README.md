@@ -1,6 +1,6 @@
 # SNPTool
 Herramienta para la predicción de la patogenicidad de los Polimorfismos de Nucleótido Único.
-La herramienta se encuentra accesible a través del link https://snptool.es
+La herramienta se encuentra accesible a través del link https://www.snptool.es
 
 Este repositorio se divide en dos partes:
 
